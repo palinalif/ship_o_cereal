@@ -1,4 +1,12 @@
 .cereal-img {
-    border:10px solid rebeccapurple;
-    width: 25%;
+    border: 2px solid rebeccapurple;
+    margin: 10px;
+    padding: 5px;
+    width: 16vw;
+}
+
+.cereal-container {
+    display: inline-block;
+    padding: 10px;
+    width: 20vw;
 }
