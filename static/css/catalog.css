@@ -1,4 +1,29 @@
 .cereal-img {
-    border:10px solid rebeccapurple;
-    width: 25%;
+    width:100%;
+}
+p {
+    display:inline;
+}
+
+.counter-container {
+    display:inline;
+    padding-right: 1em;
+    font-size:1.5em;
+    font-weight: bold;
+}
+
+.cereal-container {
+    margin: 1.3em;
+    padding:0.5em;
+    background-color: antiquewhite;
+    width:25%;
+}
+
+button {
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
 }
