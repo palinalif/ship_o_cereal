@@ -1,4 +1,20 @@
 {% extends 'base.html' %}
+{% load static%}
+<head>
+    <title>Catalog</title>
+    <link rel="stylesheet" href = "{% static 'css/catalog.css' %}">
+</head>
 {% block content %}
     <h1>This is the Catalog</h1>
+    <div class = "catalog-container">
+        <div class = "cereal-container">
+            <img src="https://images-na.ssl-images-amazon.com/images/I/81VQIHQ0-CL._SL1500_.jpg" alt="Cheerios box art" class = "cereal-img"/>
+            <h3>Cheerios</h3>
+            <div>
+                <p style="display:inline">600 kr.</p>
+                <button>-</button>0<button>+</button>
+                <button>Cart</button>
+            </div>
+        </div>
+    </div>
 {% endblock %}
