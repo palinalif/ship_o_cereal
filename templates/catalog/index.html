@@ -7,7 +7,19 @@
     <link rel="stylesheet" href="{% static 'css/catalog.css' %}">
     <h1>This is the Catalog</h1>
     <div class = "catalog-container">
+        {% for cereal in cereals %}
         <div class = "cereal-container">
+            <img src={{ cereal.image }} class="cereal-img"/>
+            <h3>{{ cereal.name }}</h3>
+            <div>
+                <p style="display: inline">{{ cereal.price }}</p>
+                <button>-</button>0<button>+</button>
+                <button>Cart</button>
+            </div>
+        </div>
+        {% endfor %}
+
+            <!--
             <img src="https://images-na.ssl-images-amazon.com/images/I/81VQIHQ0-CL._SL1500_.jpg" alt="Cheerios box art" class = "cereal-img"/>
             <div>
                 <h3>Cheerios</h3>
@@ -19,6 +31,6 @@
 
             <button><i class="bi bi-basket"></i></button>
             </div>
-        </div>
+            --->
     </div>
 {% endblock %}
