@@ -1,5 +1,4 @@
 .cereal-img {
-    border:10px rebeccapurple;
-    height:25%;
+    border:10px solid rebeccapurple;
+    width: 25%;
 }
-
