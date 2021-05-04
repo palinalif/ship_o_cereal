@@ -29,3 +29,7 @@ function sendToCart(cerealName) {
         }
     });
 }
+
+function goToURL(cerealID){
+    window.open("webpage.htm", "_self")
+}
