@@ -6,4 +6,23 @@
 {% block content %}
     <link rel="stylesheet" href="{% static 'css/catalog.css' %}">
     <p>Hello! This is the confirm card site!</p>
+    <!-- Pálína: I don't know how I feel about this here, it feels like this page and the register card page could be combined
+     into one site and just leave the total amount and user info on the other page and then have it again on the review step... -->
+    <div id = "customer-info">
+        <h2>Total: 100000000 kr.</h2>
+        <div id = "user-info-container">
+            <p>Name: Jón Jónsson</p>
+            <p>Phone number: 123-4567</p>
+            <p>Address: Eitthvaðstræti 12</p>
+        </div>
+    </div>
+    <div id = "card-info">
+
+    </div>
+    <form action="{% url 'cart-index' %}">
+        <button type = "submit">Register New Card</button>
+    </form>
+    <form action = "{% url 'cart-index' %}">
+        <button type = "submit">Go Back</button>
+    </form>
 {% endblock %}
