@@ -36,8 +36,12 @@
             <p>Address: Eitthvaðstræti 12</p>
         </div>
         <div id = "button-container">
-            <button>Pay</button>
-            <button>Go Back</button>
+            <form action="{% url 'confirm-card' %}">
+                <button type = "submit">Pay</button>
+            </form>
+            <form action = "https://google.com">
+                <button type = "submit">Go Back</button>
+            </form>
         </div>
     </div>
 {% endblock %}
