@@ -1,9 +1,18 @@
 {% extends 'base.html' %}
 {% load static %}
-<head>
-    <title>Catalog</title>
-</head>
 {% block content %}
     <link rel="stylesheet" href="{% static 'css/login.css' %}">
-    <h1>Login</h1>
+    <div class="center">
+        <div class="login-container">
+        <img class="big-logo" src="/static/images/cereallogo.png" alt="Logo">
+        <label for="email">Email: </label>
+            <input type="email" id="email" placeholder="Enter email" name="email">
+        <label for="pwd">Password: </label>
+            <input type="password" id="pwd" placeholder="Enter password" name="pswd">
+        <div class="button-container">
+            <button>Register new account</button>
+            <button>Login</button>
+        </div>
+        </div>
+    </div>
 {% endblock %}

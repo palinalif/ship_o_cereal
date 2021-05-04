@@ -1,0 +1,30 @@
+.login-container{
+    width: 600px;
+    height: 600px;
+    margin-top: 50px;
+    display: inline-block;
+}
+.button-container{
+    display: inline-flex;
+}
+.center{
+    text-align: center;
+}
+.big-logo{
+    width: 80%;
+    height: 40%;
+}
+label{
+    width: 20%;
+    text-align: left;
+}
+input{
+    width: 60%;
+}
+button{
+    width: 200px;
+    height: 100px;
+    margin: 10px;
+    margin-right: 40px;
+    margin-left: 40px;
+}
