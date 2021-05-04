@@ -1,4 +1,5 @@
 let index = 0;
+
 function decrement() {
     if (index > 0) index--;
     updateAmount(index);
@@ -24,7 +25,11 @@ function checkHowManyExist(){
     }
 }
 
-function getNameAndPrice(){
-
+function getNameAndPriceAndIngreeAndNutri(){
+    document.getElementById("cerealName").textContent = "Cheerios";
+    document.getElementById("cerealPrice").textContent = "700";
+    document.getElementById("Ingreedients").textContent = "Ingreedients: Cheerios";
+    document.getElementById("Nurtitional").textContent = "Nurtitional information: Carbs";
 }
 checkHowManyExist();
+getNameAndPriceAndIngreeAndNutri();
