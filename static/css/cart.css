@@ -46,3 +46,7 @@ button {
 h2 {
     text-align: center;
 }
+
+form {
+    display:inline;
+}
