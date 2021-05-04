@@ -5,6 +5,7 @@
 </head>
 {% block content %}
     <link rel="stylesheet" href="{% static 'css/catalog.css' %}">
+    <script src="{% static 'jquery/dist/jquery.js' %}"></script>
     <script src="{% static 'js/catalog.js' %}"></script>
     <h1>This is the Catalog</h1>
     <div class = "catalog-container">
@@ -16,9 +17,9 @@
             <div>
                 <p style="display: inline">{{ cereal.price }}</p>
                 <button onclick='decrement("{{ cereal.name }}")'>-</button>
-                    <p class="cereal-amount" id="{{ cereal.name }} amount">0</p>
+                <p class="cereal-amount" id="{{ cereal.name }} amount">0</p>
                 <button onclick='increment("{{ cereal.name }}")'>+</button>
-                <button>Cart</button>
+                <button onclick='sendToCart("{{ cereal.name }}")'>Cart</button>
             </div>
         </div>
         {% endfor %}
