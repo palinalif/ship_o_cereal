@@ -10,3 +10,7 @@
     padding: 10px;
     width: 20vw;
 }
+
+.cereal-amount {
+    display: inline;
+}
