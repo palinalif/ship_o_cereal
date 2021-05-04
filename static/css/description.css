@@ -47,12 +47,14 @@
     width: 6vw;
     height: 3vw;
     padding: 5px;
+    background-color: #f2ad60;
 }
 
 .smallButton{
     width: 4vw;
     height: 2vw;
     padding: 5px;
+    background-color: #f2ad60;
 }
 
 .Title{
