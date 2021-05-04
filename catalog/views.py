@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from product.views import getCereals
+from products.views import getCereals
 
 # Create your views here.
 def index(request):
