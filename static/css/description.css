@@ -1,0 +1,64 @@
+.img {
+    border: 2px solid rebeccapurple;
+    margin: 10px;
+    padding: 5px;
+    width: 20em;
+    float: left;
+}
+
+.information{
+    display: inline-block;
+    margin: 10px;
+    padding: 5px;
+    width: 20em;
+}
+
+.info{
+    display: inline-block;
+    flex: right;
+    width: 20vw;
+    height: 10vw;
+}
+
+.inStock{
+    font-size: 20px;
+    color: gray;
+
+}
+
+.bigButtons{
+    width: 20em;
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.smallButtons{
+    width: 20em;
+    margin: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bigButton{
+    width: 6vw;
+    height: 3vw;
+    padding: 5px;
+}
+
+.smallButton{
+    width: 4vw;
+    height: 2vw;
+    padding: 5px;
+}
+
+.Title{
+    margin: 10px;
+}
+
+.amount{
+    padding: 20px;
+}
