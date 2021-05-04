@@ -1,4 +1,43 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
-    <h1>This is the Cart</h1>
+    <link rel="stylesheet" href="{% static 'css/cart.css' %}">
+    <div id = "cereal-container">
+        <div class = "cereal-cart-info-box">
+            <img src="https://images-na.ssl-images-amazon.com/images/I/81VQIHQ0-CL._SL1500_.jpg"/>
+            <h3>Cheerios</h3>
+            <div class = "cereal-info">
+                <p>Amount: 2</p>
+                <p>Price: 1200</p>
+            </div>
+        </div>
+        <div class = "cereal-cart-info-box">
+            <img src="https://images-na.ssl-images-amazon.com/images/I/81VQIHQ0-CL._SL1500_.jpg"/>
+            <h3>Cheerios</h3>
+            <div class = "cereal-info">
+                <p>Amount: 2</p>
+                <p>Price: 1200</p>
+            </div>
+        </div>
+        <div class = "cereal-cart-info-box">
+            <img src="https://images-na.ssl-images-amazon.com/images/I/81VQIHQ0-CL._SL1500_.jpg"/>
+            <h3>Cheerios</h3>
+            <div class = "cereal-info">
+                <p>Amount: 2</p>
+                <p>Price: 1200</p>
+            </div>
+        </div>
+    </div>
+    <div id = "right-side-container">
+        <h2>Total: 100000000 kr.</h2>
+        <div id = "user-info-container">
+            <p>Name: Jón Jónsson</p>
+            <p>Phone number: 123-4567</p>
+            <p>Address: Eitthvaðstræti 12</p>
+        </div>
+        <div id = "button-container">
+            <button>Pay</button>
+            <button>Go Back</button>
+        </div>
+    </div>
 {% endblock %}
