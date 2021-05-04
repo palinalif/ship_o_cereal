@@ -5,23 +5,25 @@
 </head>
 {% block content %}
     <link rel="stylesheet" href="{% static 'css/description.css' %}">
+    <script src="{% static 'jquery/dist/jquery.js' %}"></script>
     <h1>This is the Description</h1>
     <img class= "img" src="https://images-na.ssl-images-amazon.com/images/I/81VQIHQ0-CL._SL1500_.jpg" alt="Cereal img">
     <div class = "information">
         <h2 class= "cerealName" > Cereal name </h2>
         <h3 class= "cerealPrice" > Cereal price </h3>
         <h4 class= "priceKg" > 1400 kr/kg </h4>
-        <p class= "inStock" > if ammount > 0 then in stock </p>
+        <p id= "inStock"></p>
     </div>
     <div class= "info" > Ingreedients: </div>
     <div class= "info"> Nurtitional information:</div>
     <div class ="smallButtons">
-        <button class="smallButton" > - </button>
-        <span class="amount"> 0 </span>
-        <button class="smallButton" > + </button>
+        <button onclick='decrement()' class="smallButton" > - </button>
+        <span id="amount"> 0 </span>
+        <button onclick='increment()' class="smallButton" > + </button>
     </div>
     <div class ="bigButtons">
         <button class="bigButton" > Go Back </button>
         <button class="bigButton" > Add to cart </button>
     </div>
+<script src="{% static 'js/description.js' %}"></script>
 {% endblock %}

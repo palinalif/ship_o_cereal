@@ -20,7 +20,7 @@
     height: 10vw;
 }
 
-.inStock{
+#inStock{
     font-size: 20px;
     color: gray;
 
@@ -61,6 +61,6 @@
     margin: 10px;
 }
 
-.amount{
+#amount{
     padding: 20px;
 }
