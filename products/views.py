@@ -42,3 +42,7 @@ cereals = [
 
 def getCereals():
     return cereals
+
+def product(request, id):
+    # TODO: make id check and if invalid goto 404 page
+    return render(request, 'products/index.html', context=({'cereal': cereals[id]}))

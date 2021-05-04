@@ -26,8 +26,6 @@ function checkHowManyExist(){
 }
 
 function getNameAndPriceAndIngreeAndNutri(){
-    document.getElementById("cerealName").textContent = "Cheerios";
-    document.getElementById("cerealPrice").textContent = "700";
     document.getElementById("Ingreedients").textContent = "Ingreedients: Cheerios";
     document.getElementById("Nurtitional").textContent = "Nurtitional information: Carbs";
 }
