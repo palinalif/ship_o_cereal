@@ -14,8 +14,8 @@
         <h4 class= "priceKg" > 1400 kr/kg </h4>
         <p id= "inStock"></p>
     </div>
-    <div class= "info" id="Ingreedients" ></div>
-    <div class= "info" id="Nurtitional" ></div>
+    <div class= "info" id="Ingreedients" >{{ cereal.ingredients }}</div>
+    <div class= "info" id="Nurtitional" >{{ cereal.nutritional }}</div>
     <div class ="smallButtons">
         <button onclick='decrement()' class="smallButton" > - </button>
         <span id="amount"> 0 </span>

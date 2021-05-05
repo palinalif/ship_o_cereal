@@ -8,6 +8,18 @@
     <script src="{% static 'jquery/dist/jquery.js' %}"></script>
     <script src="{% static 'js/catalog.js' %}"></script>
     <h1>This is the Catalog</h1>
+    <label for="filter">Filter by: </label>
+    <span id="filter">
+        <button>Healthy</button>
+        <button>Sugary</button>
+    </span>
+    <label for="sort">Sort by: </label>
+    <span id="sort">
+        <button>Name</button>
+        <button>Price</button>
+    </span>
+    <label for="search">Search: </label>
+            <input type="search" id="search" placeholder="search" name="search">
     <div class = "catalog-container">
         {% for cereal in cereals %}
         <div class = "cereal-container">

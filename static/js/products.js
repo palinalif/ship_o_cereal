@@ -25,9 +25,4 @@ function checkHowManyExist(){
     }
 }
 
-function getNameAndPriceAndIngreeAndNutri(){
-    document.getElementById("Ingreedients").textContent = "Ingreedients: Cheerios";
-    document.getElementById("Nurtitional").textContent = "Nurtitional information: Carbs";
-}
 checkHowManyExist();
-getNameAndPriceAndIngreeAndNutri();
