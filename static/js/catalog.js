@@ -33,3 +33,8 @@ function sendToCart(cerealName) {
 function goToURL(cerealID){
     window.open("http://127.0.0.1:8000/products/"+ cerealID+ "/", "_self")
 }
+
+function filterAndSort(label){
+    window.open("http://127.0.0.1:8000/" +label+ "/", "_self")
+}
+
