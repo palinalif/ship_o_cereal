@@ -6,4 +6,47 @@
 {% block content %}
     <link rel="stylesheet" href="{% static 'css/cart.css' %}">
     <h1>Review</h1>
+    <div id = "cereal-container">
+        <div class = "cereal-cart-info-box">
+            <img src="https://images-na.ssl-images-amazon.com/images/I/81VQIHQ0-CL._SL1500_.jpg"/>
+            <h3>Cheerios</h3>
+            <div class = "cereal-info">
+                <p>Amount: 2</p>
+                <p>Price: 1200</p>
+            </div>
+        </div>
+        <div class = "cereal-cart-info-box">
+            <img src="https://images-na.ssl-images-amazon.com/images/I/81VQIHQ0-CL._SL1500_.jpg"/>
+            <h3>Cheerios</h3>
+            <div class = "cereal-info">
+                <p>Amount: 2</p>
+                <p>Price: 1200</p>
+            </div>
+        </div>
+        <div class = "cereal-cart-info-box">
+            <img src="https://images-na.ssl-images-amazon.com/images/I/81VQIHQ0-CL._SL1500_.jpg"/>
+            <h3>Cheerios</h3>
+            <div class = "cereal-info">
+                <p>Amount: 2</p>
+                <p>Price: 1200</p>
+            </div>
+        </div>
+    </div>
+    <div id = "right-side-container">
+        <h2 id = "total-header">Total: 100000000 kr.</h2>
+        <div id = "user-info-container">
+            <p>Name: Jón Jónsson</p>
+            <p>Phone number: 123-4567</p>
+            <p>Address: Eitthvaðstræti 12</p>
+            <p>Card: Ending with 1234</p>
+        </div>
+        <div id = "button-container">
+            <form action="{% url 'receipt' %}" class = "button-form">
+                <button type = "submit">Finalize Payment</button>
+            </form>
+            <form action = "{% url 'confirm-card' %}" class = "button-form">
+                <button type = "submit">Go Back</button>
+            </form>
+        </div>
+    </div>
 {% endblock %}

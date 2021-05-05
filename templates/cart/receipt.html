@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+<head>
+    <title>Catalog Review</title>
+</head>
+{% block content %}
+    <link rel="stylesheet" href="{% static 'css/cart.css' %}">
+    <div id = "receipt-container">
+        <h1>Receipt</h1>
+        <h3>Thank you for your purchase.</h3>
+        <h3>Your purchase will be delivered to Eitthvaðstræti 123 on May 25th.</h3>
+        <button id = "receipt-button">Print Receipt</button>
+    </div>
+{% endblock %}
