@@ -31,9 +31,9 @@
     <div class = "catalog-container">
         {% for cereal in cereals %}
         <div class = "cereal-container">
-            <button onclick="goToURL({{ cereal.id }})">
+            <a href="products/{{ cereal.id }}">
                 <img src="{{ cereal.image }}" class="cereal-img"/>
-            </button>
+            </a>
             <h3>{{ cereal.name }}</h3>
             <script>cereals["{{ cereal.name }}"] = 0;</script>
             <div>
