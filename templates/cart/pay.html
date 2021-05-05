@@ -4,25 +4,92 @@
     <title>Catalog</title>
 </head>
 {% block content %}
-    <link rel="stylesheet" href="{% static 'css/catalog.css' %}">
-    <p>Hello! This is the confirm card site!</p>
-    <!-- Pálína: I don't know how I feel about this here, it feels like this page and the register card page could be combined
-     into one site and just leave the total amount and user info on the other page and then have it again on the review step... -->
-    <div id = "customer-info">
-        <h2>Total: 100000000 kr.</h2>
-        <div id = "user-info-container">
-            <p>Name: Jón Jónsson</p>
-            <p>Phone number: 123-4567</p>
-            <p>Address: Eitthvaðstræti 12</p>
-        </div>
-    </div>
+    <link rel="stylesheet" href="{% static 'css/cart.css' %}">
     <div id = "card-info">
-
+        <h3 id = "pay-with-header">Pay with:</h3>
+        <input type="radio" id = "card1" name = "cards" value = "card1" onclick="yesnoCheck();">
+        <label for="card1">
+            <div class = "card-set">
+            <p>Card ending with:</p>
+            <p>******** 1234<p>
+            </div>
+            <div class = "card-set">
+                <p>Expiry date:</p>
+                <p>1/24</p>
+            </div>
+        </label><br>
+        <input type="radio" id = "card2" name = "cards" value = "card2" onclick="yesnoCheck();">
+        <label for="card2">
+            <div class = "card-set">
+            <p>Card ending with:</p>
+            <p>******** 3426<p>
+            </div>
+            <div class = "card-set">
+                <p>Expiry date:</p>
+                <p>6/22</p>
+            </div>
+        </label><br>
+        <input type="radio" id = "new-card" name = "cards" value="new-card" onclick="yesnoCheck();">
+        <label>
+            <p>New Card...</p>
+        </label><br>
     </div>
-    <form action="{% url 'cart-index' %}">
-        <button type = "submit">Register New Card</button>
-    </form>
-    <form action = "{% url 'cart-index' %}">
+    <div id = "register-card">
+        <h3>New Card:</h3>
+        <form>
+            <label for = "card-number">Card Number:</label>
+            <input id = "card-number">
+            <br/>
+            <label for = "expireMM">Expiration Date:</label>
+            <select name='expireMM' id='expireMM'>
+                <option value=''>Month</option>
+                <option value='01'>January</option>
+                <option value='02'>February</option>
+                <option value='03'>March</option>
+                <option value='04'>April</option>
+                <option value='05'>May</option>
+                <option value='06'>June</option>
+                <option value='07'>July</option>
+                <option value='08'>August</option>
+                <option value='09'>September</option>
+                <option value='10'>October</option>
+                <option value='11'>November</option>
+                <option value='12'>December</option>
+            </select>
+            <select name='expireYY' id='expireYY'>
+                <option value=''>Year</option>
+                <option value='21'>2021</option>
+                <option value='22'>2022</option>
+                <option value='23'>2023</option>
+                <option value='24'>2024</option>
+                <option value='25'>2025</option>
+            </select>
+            <br/>
+            <label for = "cvv">CVV:</label>
+            <input id = "cvv">
+            <br/>
+            <label for="save-card">Save card info?</label>
+            <input type="checkbox" id = "save-card">
+            <br/>
+        </form>
+    </div>
+    <!-- TODO: Send card info along -->
+    <form action = "{% url 'cart-index' %}" class = "button-form">
         <button type = "submit">Go Back</button>
     </form>
+    <form action = "{% url 'review' %}" class = "button-form">
+        <button type = "submit">Confirm</button>
+    </form>
+
+    <!-- TODO: Put script in a different file -->
+    <script type="text/javascript">
+
+    function yesnoCheck() {
+        if (document.getElementById('new-card').checked) {
+            document.getElementById('register-card').style.display = 'block';
+        }
+        else document.getElementById('register-card').style.display = 'none';
+
+    }
+    </script>
 {% endblock %}
