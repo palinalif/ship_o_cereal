@@ -75,8 +75,12 @@ WSGI_APPLICATION = 'ship_o_cereal.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'cereal-o-ship',
+        'USER': 'cereal-o-ship-db-user',
+        'PASSWORD': 'ABC.12345',
+        'HOST': '34.105.143.196',
+        'PORT': '5432'
     }
 }
 
