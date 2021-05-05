@@ -6,3 +6,5 @@ def pay(request):
     return render(request, 'cart/pay.html')
 def review(request):
     return render(request, 'cart/review.html')
+def receipt(request):
+    return render(request, 'cart/receipt.html')

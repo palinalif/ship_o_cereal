@@ -10,11 +10,13 @@ html, body {
     border: dimgrey 2px solid;
     padding:5px;
     margin:10px;
+    overflow: auto;
 }
 
 img {
     height:200px;
     width:200px;
+    float:left;
 }
 
 #right-side-container {
@@ -37,7 +39,7 @@ img {
     margin-right:auto;
 }
 
-button {
+#button-container button {
     width: 45%;
     padding:15px;
     margin:10px;
@@ -76,4 +78,25 @@ button {
     margin:10px;
     background-color: #edd1a1;
     width:20%;
+}
+
+.del-button {
+    float:right;
+}
+
+#receipt-container {
+    width:50%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #deab54;
+    text-align: center;
+    padding:10px;
+}
+
+#receipt-container h1 {
+    font-weight: bold;
+}
+
+#receipt-button {
+    padding: 0.5em 2em;
 }
