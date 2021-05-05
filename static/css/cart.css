@@ -43,10 +43,37 @@ button {
     margin:10px;
 }
 
-h2 {
+#total-header {
     text-align: center;
 }
 
-form {
+.button-form {
     display:inline;
+}
+
+#confirm-button {
+    float:right;
+}
+
+#register-card {
+    margin:10px;
+    display: none;
+}
+
+#card-info {
+    background-color: #adadad;
+    width:20%;
+    margin:10px;
+    overflow: auto;
+}
+.card-set {
+    display:inline-block;
+    margin-left:10px;
+    margin-right: 10px;
+}
+
+#customer-info-pay {
+    margin:10px;
+    background-color: #edd1a1;
+    width:20%;
 }
