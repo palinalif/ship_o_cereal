@@ -29,17 +29,17 @@
         </div>
     </div>
     <div id = "right-side-container">
-        <h2>Total: 100000000 kr.</h2>
+        <h2 id = "total-header">Total: 100000000 kr.</h2>
         <div id = "user-info-container">
             <p>Name: Jón Jónsson</p>
             <p>Phone number: 123-4567</p>
             <p>Address: Eitthvaðstræti 12</p>
         </div>
         <div id = "button-container">
-            <form action="{% url 'confirm-card' %}">
+            <form action="{% url 'confirm-card' %}" class = "button-form">
                 <button type = "submit">Pay</button>
             </form>
-            <form action = "{% url 'index' %}">
+            <form action = "{% url 'index' %}" class = "button-form">
                 <button type = "submit">Go Back</button>
             </form>
         </div>

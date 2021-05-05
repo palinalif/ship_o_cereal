@@ -16,17 +16,11 @@
     display: inline;
 }
 
-/** {
-    /*border: solid 1px;
-}
-*/
-
 #filter{
     margin: 50px;
 }
 #sort{}
 
 #search{
-    padding: 50px;
     margin: 10px;
 }
