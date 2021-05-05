@@ -14,22 +14,11 @@
     height: 150px;
     margin-right: 100%;
 }
-.profile-container{
-    display: inline-flex;
-}
-.photo{
-    width: 150px;
-    height: 150px;
-}
 #left{
     margin-left: 300px;
 }
-#left-btn{
-    margin-top: 30px;
-}
 #pic{
-    margin-top: 84px;
-    margin-left: 250px;
+    margin-left: 400px;
 }
 label{
     width: 20%;
@@ -39,9 +28,6 @@ label{
 input{
     width: 60%;
     height: 30px;
-}
-input#fileinput{
-    width: 200px;
 }
 button{
     width: 200px;

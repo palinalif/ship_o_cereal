@@ -1,10 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-    <link rel="stylesheet" href="{% static 'css/register.css' %}">
+    <link rel="stylesheet" href="{% static 'css/edit_profile.css' %}">
     <div class="center">
-        <div class="register-container" id="left">
-            <img class="big-logo" src="/static/images/cereallogo.png" alt="Logo">
+        <div class="edit_container" id="left">
             <label for="name">Name: </label>
                 <input type="text" id="name" placeholder="Enter name" name="name">
             <label for="pnr">Post Nr: </label>
@@ -13,20 +12,12 @@
                 <input type="text" id="str name" placeholder="Enter street name" name="str name">
             <label for="hnr">House number: </label>
                 <input type="text" id="hnr" placeholder="Enter house number" name="hnr">
-            <label for="phnr">Phone number: </label>
-                <input type="text" id="phnr" placeholder="Enter phone number" name="phnr">
             <div class="button-container">
                 <button>Go back</button>
             </div>
         </div>
         <div class="register-container" id="right">
-            <div class="profile-container">
-                <form method="post" action="..." enctype="multipart/form-data" id="pic">
-                <label for="image">Photo</label>
-                <input name="image" type="file" accept="image/*" id="fileinput"/>
-                </form>
-                <img class="photo" src="/static/images/profile.png" alt="Profile pic">
-            </div>
+            <img class="big-logo" src="/static/images/cereallogo.png" alt="Logo" id="pic">
             <label for="city">City: </label>
                 <input type="text" id="city" placeholder="Enter city" name="city">
             <label for="country">Country: </label>
@@ -35,7 +26,7 @@
                 <input type="email" id="email" placeholder="Enter email" name="email">
             <label for="pwd">Password: </label>
                 <input type="password" id="pwd" placeholder="Enter password" name="pswd">
-            <div class="button-container" id="left-btn">
+            <div class="button-container">
                 <button>Create account</button>
             </div>
         </div>
