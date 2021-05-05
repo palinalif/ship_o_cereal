@@ -4,7 +4,7 @@ from register.models import Order
 
 # Create your models here.
 
-class OrderItems(models.Model):
+class OrderItem(models.Model):
     order = models.ForeignKey(Order)
     product = models.ForeignKey(Product)
     quantity = models.IntegerField()
