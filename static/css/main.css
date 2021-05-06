@@ -1,17 +1,46 @@
 .logo{
-    border: solid 2px;
     width: 100px;
     height: 75px;
     margin: 10px;
 }
 
 .logoText{
-    font-size: 24px;
-    background-color: orange;
-    border: solid 2px;
+    font-size: 30px;
+    font-family: "Pacifico", sans-serif;
+    color: white;
     float: right;
     width: 200px;
-    height: 75px;
-    margin: 10px;
     text-align: center;
+    margin-top:7%;
+    text-shadow: 2px 2px gray;
 }
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.navbar-navbar-default {
+    background: linear-gradient(-45deg, #f2ad60, #ff4d4d, #f2ad60, #ff4d4d);
+    background-size: 400% 400%;
+    animation: gradient 15s ease
+infinite;
+}
+
+
+
+
+/*
+.navbar-navbar-default {
+    background: linear-gradient(-45deg, #f2ad60, #e73c7e, #f2ad60, #e73c7e);
+    background-size: 400% 400%;
+    animation: gradient 15s ease
+infinite;
+}
+*/
