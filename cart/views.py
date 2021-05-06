@@ -44,9 +44,9 @@ def pay(request):
     return render(request, 'cart/pay.html', { "cards": cards } )
 
 def review(request):
-    return render(request, 'cart/review.html')
+    return render(request, 'cart/review.html', user_info)
 def receipt(request):
-    return render(request, 'cart/receipt.html')
+    return render(request, 'cart/receipt.html', user_info)
 
 def addToCart(request):
     if request.method == 'POST':
