@@ -3,7 +3,6 @@ from django.db import models
 # Create your models here.
 
 class Address(models.Model):
-    addressID = models.UUIDField()
     country = models.CharField(max_length=255)
     city = models.CharField(max_length=255)
     houseNumber = models.IntegerField()
@@ -11,7 +10,6 @@ class Address(models.Model):
     postNumber = models.IntegerField()
 
 class User(models.Model):
-    userID = models.UUIDField()
     name = models.CharField(max_length=255)
     email = models.EmailField(max_length=255)
     password = models.CharField(max_length=255)
@@ -33,6 +31,5 @@ class SearchHistory(models.Model):
 
 class Order(models.Model):
     userID = models.ForeignKey(User, on_delete=models.CASCADE)
-    orderID = models.UUIDField()
     status = models.CharField(max_length = 255)
     dateCreated = models.DateTimeField(auto_now_add = True)
