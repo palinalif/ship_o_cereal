@@ -45,3 +45,19 @@ INSERT INTO products_productimage (image, product_id) VALUES
 --INSERT INTO cart_orderitem(quantity, order_id, product_id) VALUES
 --(2, 1, 1),
 --(1, 1, 9);
+
+
+INSERT INTO register_order ("status", "userID_id") VALUES ('done', 1);
+INSERT INTO register_order ("status", "userID_id") VALUES ('done', 2);
+INSERT INTO register_order ("status", "userID_id") VALUES ('done', 3);
+INSERT INTO register_order ("status", "userID_id") VALUES ('in progress', 1);
+
+INSERT INTO register_paymentinfo ("cardHolder", "cardNumber", "expDate", "cvc", "userID_id") VALUES ('Daníel Örn Sigurðsson', 1234 5678 1111 1111, '1221', 121, 1);
+INSERT INTO register_paymentinfo ("cardHolder", "cardNumber", "expDate", "cvc", "userID_id") VALUES ('Garpur Hnévill', 1234 5678 2222 2222, '0522', 122, 2);
+INSERT INTO register_paymentinfo ("cardHolder", "cardNumber", "expDate", "cvc", "userID_id") VALUES ('Jón Jónsson', 1234 5678 3333 3333, '0523', 124, 3);
+INSERT INTO register_paymentinfo ("cardHolder", "cardNumber", "expDate", "cvc", "userID_id") VALUES ('Gunnar Ingvarsson', 1234 5678 4444 4444, '0524', 124, 4);
+
+INSERT INTO register_searchhistory ("query", "date", "userID_id") VALUES ('Daníel Örn Sigurðsson', 21, 1);
+INSERT INTO register_searchhistory ("query", "date", "userID_id") VALUES ('Garpur Hnévill', 22, 2);
+INSERT INTO register_searchhistory ("query", "date", "userID_id") VALUES ('Jón Jónsson', 23, 3);
+INSERT INTO register_searchhistory ("query", "date", "userID_id") VALUES ('Gunnar Ingvarsson', 24, 4);
