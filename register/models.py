@@ -1,14 +1,13 @@
 from django.db import models
-from cart.models import OrderItem
 
 # Create your models here.
 
 class Address(models.Model):
     addressID = models.UUIDField()
-    country = models.CharField()
-    city = models.CharField()
+    country = models.CharField(max_length=255)
+    city = models.CharField(max_length=255)
     houseNumber = models.IntegerField()
-    streetName = models.CharField()
+    streetName = models.CharField(max_length=255)
     postNumber = models.IntegerField()
 
 class User(models.Model):
@@ -16,22 +15,24 @@ class User(models.Model):
     name = models.CharField(max_length=255)
     email = models.EmailField(max_length=255)
     password = models.CharField(max_length=255)
-    phone = models.IntegerField(max_length=7)
+    phone = models.IntegerField()
     photo = models.CharField(max_length=999)
     address = models.ForeignKey(Address, on_delete= models.CASCADE)
 
 class PaymentInfo(models.Model):
     userID = models.ForeignKey(User, on_delete=models.CASCADE)
     cardHolder = models.CharField(max_length=255)
-    cardNumber = models.IntegerField(max_length=16)
-    expDate = models.IntegerField(max_length=16)
-    cvc = models.IntegerField(max_length=3)
+    cardNumber = models.IntegerField()
+    expDate = models.IntegerField()
+    cvc = models.IntegerField()
 
 class SearchHistory(models.Model):
     userID = models.ForeignKey(User, on_delete=models.CASCADE)
     query = models.CharField(max_length=255)
     date = models.DateTimeField(auto_now_add= True, blank= True)
 
-class Orders(models.Model):
+class Order(models.Model):
     userID = models.ForeignKey(User, on_delete=models.CASCADE)
-    orderID = models.ForeignKey(OrderItem, on_delete=models.CASCADE)
+    orderID = models.UUIDField()
+    status = models.CharField(max_length = 255)
+    dateCreated = models.DateTimeField(auto_now_add = True)
