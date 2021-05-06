@@ -5,7 +5,8 @@ import json
 
 cart = {}
 
-user_info = [{
+#Let's say that we already have the user that's logged in with this dictionary
+user_info = {
     'id': 1,
     'name': 'Test User',
     'email': 'user@testuser.com',
@@ -16,8 +17,9 @@ user_info = [{
     'city': 'Reykjavík',
     'country': 'Iceland',
     'postalCode': 109
-}]
+}
 
+#and let's say that these are their cards
 cards = [
     {
         'userId':1,
@@ -35,13 +37,11 @@ cards = [
     }
 ]
 
-
-
 def index(request):
-    return render(request, 'cart/index.html')
+    return render(request, 'cart/index.html', user_info )
 
 def pay(request):
-    return render(request, 'cart/pay.html')
+    return render(request, 'cart/pay.html', { "cards": cards } )
 
 def review(request):
     return render(request, 'cart/review.html')
@@ -58,3 +58,4 @@ def addToCart(request):
     # else:
     #     cart[cereal] += amount
     return re
+
