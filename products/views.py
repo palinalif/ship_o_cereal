@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from products.models import *
-from products.forms.createProduct import ProductCreateForm
+from products.forms.createProduct import ProductCreateForm, ProductUpdateForm
 
 # Create your views here.
 
@@ -41,3 +41,17 @@ def deleteProduct(request, id):
     cereal = get_object_or_404(Product, pk = id)
     cereal.delete()
     return redirect('catalog-page')
+
+def updateProduct(request, id):
+    instance = get_object_or_404(Product, pk = id)
+    if request.method == 'POST':
+        form = ProductUpdateForm(data=request.POST, instance=instance)
+        if form.is_valid():
+            form.save()
+            return redirect('product-index', id=id)
+    else:
+        form = ProductUpdateForm(instance=instance)
+    return render(request, 'products/update.html', {
+        'form': form,
+        'id': id
+    })

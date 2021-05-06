@@ -15,10 +15,8 @@
 
 .info{
     display: inline-block;
-    flex: right;
     width: 20vw;
     height: 10vw;
-    text-size: 24px;
 }
 
 #inStock{
@@ -64,4 +62,12 @@
 
 #amount{
     padding: 20px;
+}
+
+#deleteButton{
+    display: none;
+}
+
+#updateButton{
+    display: none;
 }

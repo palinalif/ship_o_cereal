@@ -61,3 +61,8 @@ INSERT INTO register_searchhistory ("query", "date", "userID_id") VALUES ('Daní
 INSERT INTO register_searchhistory ("query", "date", "userID_id") VALUES ('Garpur Hnévill', 22, 2);
 INSERT INTO register_searchhistory ("query", "date", "userID_id") VALUES ('Jón Jónsson', 23, 3);
 INSERT INTO register_searchhistory ("query", "date", "userID_id") VALUES ('Gunnar Ingvarsson', 24, 4);
+
+INSERT INTO cart_orderitem ("quantity", "order_id", "product_id") VALUES ('2', 1, 1);
+INSERT INTO cart_orderitem ("quantity", "order_id", "product_id") VALUES ('2', 1, 2);
+INSERT INTO cart_orderitem ("quantity", "order_id", "product_id") VALUES ('1', 2, 3);
+INSERT INTO cart_orderitem ("quantity", "order_id", "product_id") VALUES ('1', 4, 4);

@@ -25,5 +25,8 @@
         <button class="bigButton" > Go Back </button>
         <button class="bigButton" > Add to cart </button>
     </div>
+    <a id= "deleteButton" href="{% url 'delete_product' cereal.id %}" class="block btn btn-primary">Delete Product</a>
+    <a id= "updateButton" href="{% url 'update_product' cereal.id %}" class="block btn btn-primary">update Product</a>
+
 <script src="{% static 'js/products.js' %}"></script>
 {% endblock %}
