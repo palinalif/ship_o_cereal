@@ -10,21 +10,13 @@
     <h1>This is the Catalog</h1>
     <label for="filter">Filter by: </label>
     <span id="filter">
-        <form action="filter/healthy">
-            <button type = "submit"> Healthy </button>
-        </form>
-        <form action="filter/sugary">
-            <button type = "submit" >Sugary</button>
-        </form>
+        <button onclick = "sortOrFilterBy(healthy)" >Healthy </button>
+        <button onclick = "sortOrFilterBy(sugary)" >Sugary</button>
     </span>
     <label for="sort">Sort by: </label>
     <span id="sort">
-        <form action="sort/price">
-            <button type = "submit">Price</button>
-        </form>
-        <form action="sort/name">
-            <button type = "submit">Name</button>
-        </form>
+        <button onclick = "sortOrFilterBy(price)">Price</button>
+        <button onclick = "sortOrFilterBy(name)">Name</button>
     </span>
     <label for="search">Search: </label>
             <input type="search" id="search" placeholder="search" name="search">
