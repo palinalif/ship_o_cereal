@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from products.models import *
 from products.forms.createProduct import ProductCreateForm
 
@@ -20,14 +20,24 @@ def getFilterBy(strin):
 def product(request, id):
     # TODO: make id check and if invalid goto 404 page
     return render(request, 'products/index.html', {
-        'cereal': get_object_or_404(Product, pk=id)
+        'cereal': get_object_or_404(Product, pk = id)
     })
 
 def createProduct(request):
     if request.method == 'POST':
-        print(1)
+        form = ProductCreateForm(data = request.POST)
+        if form.is_valid():
+            cereal = form.save()
+            cerealImage = ProductImage(image = request.POST['image'], product = cereal)
+            cerealImage.save()
+            return redirect('catalog-page')
     else:
         form = ProductCreateForm()
     return render(request, 'products/create.html', {
         'form': form
     })
+
+def deleteProduct(request, id):
+    cereal = get_object_or_404(Product, pk = id)
+    cereal.delete()
+    return redirect('catalog-page')
