@@ -7,7 +7,24 @@
     <link rel="stylesheet" href="{% static 'css/cart.css' %}">
     <div id = "card-info">
         <h3 id = "pay-with-header">Pay with:</h3>
-        <input type="radio" id = "card1" name = "cards" value = "card1" onclick="yesnoCheck();">
+        {% for card in cards %}
+            <input type="radio" id = "card {{ forloop.counter}}" name = "cards" value = "card {{ forloop.counter }}" onclick="yesnoCheck();">
+            <label for="card1">
+                <div class = "card-set">
+                <p>Card ending with:</p>
+                <p>******** {{ card.cardNumber | stringformat:"i" | slice:"-4:"}}<p>
+                </div>
+                <div class = "card-set">
+                    <p>Expiry date:</p>
+                    <p>{{ card.expDate | slice:":2" }}/{{ card.expDate | slice:"-2:" }}</p>
+                </div>
+            </label><br>
+        {% endfor %}
+        <input type="radio" id = "new-card" name = "cards" value="new-card" onclick="yesnoCheck();">
+        <label>
+            <p>New Card...</p>
+        </label><br>
+        <!--<input type="radio" id = "card1" name = "cards" value = "card1" onclick="yesnoCheck();">
         <label for="card1">
             <div class = "card-set">
             <p>Card ending with:</p>
@@ -33,7 +50,7 @@
         <label>
             <p>New Card...</p>
         </label><br>
-    </div>
+    </div>-->
     <div id = "register-card">
         <h3>New Card:</h3>
         <form>

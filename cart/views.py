@@ -25,14 +25,14 @@ cards = [
         'userId':1,
         'cardHolderName':'Test User',
         'cardNumber':377337278995056,
-        'expDate':1204,
+        'expDate':"0122",
         'cvc':123
     },
     {
         'userId':1,
         'cardHolderName':'Test User',
         'cardNumber':342935602344123,
-        'expDate':2408,
+        'expDate':"1125",
         'cvc':456
     }
 ]
