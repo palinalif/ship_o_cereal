@@ -29,3 +29,17 @@ function sendToCart(cerealName) {
         }
     });
 }
+
+function sortOrFilterBy(att){return false}
+/*    products = []
+    if (att === 'name' || att === 'price'){
+        products = GET
+        document.getElementById(catalog-container)
+    }
+    else{
+        return false
+    }
+    for (i = 0; i in products; i++){
+
+    }
+}*/
