@@ -30,16 +30,36 @@ function sendToCart(cerealName) {
     });
 }
 
-function sortOrFilterBy(att){return false}
-/*    products = []
-    if (att === 'name' || att === 'price'){
-        products = GET
-        document.getElementById(catalog-container)
-    }
-    else{
-        return false
-    }
-    for (i = 0; i in products; i++){
+$(document).ready(function() {
+    $('#search-btn').on('click', function(e) {
+        e.preventDefault();
+        var searchText = $('#search').val();
+        $.ajax({
+            url: '?searchFilter=' + searchText,
+            type: 'GET',
+            success: function(resp) {
+                var newHtml = resp.data.map(d => {
+                    return `<div class="cereal-container">
+                        <a href="/products/${d.id}">
+                            <img src="${d.image}" class="cereal-img"/>
+                        </a>
+                        <h3>${d.name}</h3>
+                        <div>
+                            <p style="display: inline">${d.price}</p>
+                            <button onClick="decrement(${d.name})">-</button>
+                            <p className="cereal-amount" id="${d.name} amount">${cereals[d.name]}</p>
+                            <button onClick="increment(${d.name})">+</button>
+                            <button onClick="sendToCart(${d.name})">Cart</button>
+                        </div>
+                    </div>`
+                });
+                $('.catalog-container').html(newHtml.join(''));
+                $('#search').val('');
 
-    }
-}*/
+            },
+            error: function(xhr, status, error) {
+                console.log(error);
+            }
+        })
+    });
+});

@@ -19,7 +19,9 @@
         <button onclick = "sortOrFilterBy(name)">Name</button>
     </span>
     <label for="search">Search: </label>
-            <input type="search" id="search" placeholder="search" name="search">
+        <input type="search" id="search" placeholder="search" name="search"/>
+        <button type="button" id="search-btn" class="btn btn-default">Search</button>
+
     <div class = "catalog-container">
         {% for cereal in cereals %}
         <div class = "cereal-container">
