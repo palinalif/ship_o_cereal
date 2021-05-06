@@ -24,33 +24,7 @@
         <label>
             <p>New Card...</p>
         </label><br>
-        <!--<input type="radio" id = "card1" name = "cards" value = "card1" onclick="yesnoCheck();">
-        <label for="card1">
-            <div class = "card-set">
-            <p>Card ending with:</p>
-            <p>******** 1234<p>
-            </div>
-            <div class = "card-set">
-                <p>Expiry date:</p>
-                <p>1/24</p>
-            </div>
-        </label><br>
-        <input type="radio" id = "card2" name = "cards" value = "card2" onclick="yesnoCheck();">
-        <label for="card2">
-            <div class = "card-set">
-            <p>Card ending with:</p>
-            <p>******** 3426<p>
-            </div>
-            <div class = "card-set">
-                <p>Expiry date:</p>
-                <p>6/22</p>
-            </div>
-        </label><br>
-        <input type="radio" id = "new-card" name = "cards" value="new-card" onclick="yesnoCheck();">
-        <label>
-            <p>New Card...</p>
-        </label><br>
-    </div>-->
+    </div>
     <div id = "register-card">
         <h3>New Card:</h3>
         <form>
@@ -97,19 +71,10 @@
     <form action = "{% url 'cart-index' %}" class = "button-form">
         <button type = "submit">Go Back</button>
     </form>
-    <form action = "{% url 'review' %}" class = "button-form">
+    <form action = "{% url 'review' %}" class = "button-form" onsubmit="testingSubmit();">
         <button type = "submit">Confirm</button>
     </form>
 
     <!-- TODO: Put script in a different file -->
-    <script type="text/javascript">
-
-    function yesnoCheck() {
-        if (document.getElementById('new-card').checked) {
-            document.getElementById('register-card').style.display = 'block';
-        }
-        else document.getElementById('register-card').style.display = 'none';
-
-    }
-    </script>
+    <script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
 {% endblock %}
