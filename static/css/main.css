@@ -1,19 +1,18 @@
 .logo{
-    border: solid 2px;
     width: 100px;
     height: 75px;
     margin: 10px;
 }
 
 .logoText{
-    font-size: 24px;
-    background-color: #f2ad60;
-    border: solid 2px;
+    font-size: 30px;
+    font-family: "Pacifico", sans-serif;
+    color: white;
     float: right;
     width: 200px;
-    height: 75px;
-    margin: 10px;
     text-align: center;
+    margin-top:7%;
+    text-shadow: 2px 2px gray;
 }
 @keyframes gradient {
     0% {

@@ -5,6 +5,38 @@ import json
 
 cart = {}
 
+user_info = [{
+    'id': 1,
+    'name': 'Test User',
+    'email': 'user@testuser.com',
+    'phone': '123-4567',
+    'password': 'dfjajfauwr89428934d',
+    'streetName': 'Eitthvaðstræti',
+    'houseNumber': '69',
+    'city': 'Reykjavík',
+    'country': 'Iceland',
+    'postalCode': 109
+}]
+
+cards = [
+    {
+        'userId':1,
+        'cardHolderName':'Test User',
+        'cardNumber':377337278995056,
+        'expDate':1204,
+        'cvc':123
+    },
+    {
+        'userId':1,
+        'cardHolderName':'Test User',
+        'cardNumber':342935602344123,
+        'expDate':2408,
+        'cvc':456
+    }
+]
+
+
+
 def index(request):
     return render(request, 'cart/index.html')
 
