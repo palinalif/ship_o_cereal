@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from products.models import *
+from products.forms.createProduct import ProductCreateForm
 
 # Create your views here.
 
@@ -16,7 +17,17 @@ def getFilterBy(strin):
             newCereals.append(i)
     return newCereals
 
-
 def product(request, id):
     # TODO: make id check and if invalid goto 404 page
-    return render(request, 'products/index.html', context=({'cereal': getCereals().get(id=id)}))
+    return render(request, 'products/index.html', {
+        'cereal': get_object_or_404(Product, pk=id)
+    })
+
+def createProduct(request):
+    if request.method == 'POST':
+        print(1)
+    else:
+        form = ProductCreateForm()
+    return render(request, 'products/create.html', {
+        'form': form
+    })
