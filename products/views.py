@@ -19,7 +19,7 @@ def getFilterBy(strin):
 
 def product(request, id):
     # TODO: make id check and if invalid goto 404 page
-    return render(request, 'products/login.html', {
+    return render(request, 'products/index.html', {
         'cereal': get_object_or_404(Product, pk = id)
     })
 
