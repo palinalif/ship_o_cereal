@@ -12,13 +12,13 @@
     <h1>This is the Catalog</h1>
     <label for="filter">Filter by: </label>
     <span id="filter">
-        <button class="button" onclick = "sortOrFilterBy(healthy)" >Healthy </button>
-        <button class="button" onclick = "sortOrFilterBy(sugary)" >Sugary</button>
+        <button value="healthy" type="button" class="filterBtn">Healthy </button>
+        <button value="sugary" type="button" class="filterBtn">Sugary</button>
     </span>
     <label for="sort">Sort by: </label>
     <span id="sort">
-        <button class="button" onclick = "sortOrFilterBy(price)">Price</button>
-        <button class="button" onclick = "sortOrFilterBy(name)">Name</button>
+        <button value="price" type="button" class="sortBtn">Price</button>
+        <button value="name" type="button" class="sortBtn">Name</button>
     </span>
     <label for="search">Search: </label>
         <input type="search" id="search" placeholder="search" name="search"/>
