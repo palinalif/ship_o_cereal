@@ -38,7 +38,7 @@ cards = [
 ]
 
 def index(request):
-    return render(request, 'cart/index.html', user_info )
+    return render(request, 'cart/login.html', user_info )
 
 def pay(request):
     return render(request, 'cart/pay.html', { "cards": cards } )

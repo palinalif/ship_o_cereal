@@ -3,7 +3,7 @@
 {% block content %}
     <link rel="stylesheet" href="{% static 'css/login.css' %}">
     <div class="center">
-        <form class="login-container" action="{% url 'loginUser'%}" method="post">
+        <form class="login-container" method="post">
             <img class="big-logo" src="/static/images/cereallogo.png" alt="Logo">
             {{ form }}
             <div class="button-container">
