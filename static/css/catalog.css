@@ -1,15 +1,26 @@
 .cereal-img {
-    border: 2px solid rebeccapurple;
-    height: 250px;
-    margin: 10px;
-    padding: 5px;
-    width: 250px;
+    height: 235px;
+    width: 235px;
 }
 
 .cereal-container {
     display: inline-block;
     padding: 10px;
     width: 280px;
+}
+
+.border-button {
+    border: solid 8px #ff9999;
+    transition: border-width 0.1s linear;
+    height: 250px;
+    width: 250px;
+    display: block;
+    background-color: #a6a6a6;
+
+}
+
+.border-button:hover {
+    border-width: 5px;
 }
 
 .cereal-amount {
@@ -23,4 +34,51 @@
 
 #search{
     margin: 10px;
+}
+
+.svg-wrapper {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+	  margin: 0 auto;
+  width: 320px;
+}
+.shape {
+  stroke-dasharray: 140 540;
+  stroke-dashoffset: -474;
+  stroke-width: 8px;
+  fill: transparent;
+  stroke: #19f6e8;
+  border-bottom: 5px solid black;
+  transition: stroke-width 1s, stroke-dashoffset 1s, stroke-dasharray 1s;
+}
+.text {
+  font-size: 22px;
+  line-height: 32px;
+  letter-spacing: 8px;
+  color: #fff;
+}
+.svg-wrapper:hover .shape {
+  stroke-width: 2px;
+  stroke-dashoffset: 0;
+  stroke-dasharray: 760;
+}
+
+.button{
+    background-color: #f2ad60;
+    border: none;
+    box-shadow: #a6a6a6 1px 1px;
+    text-decoration: none;
+}
+
+.button:hover {
+    background-color: #d99643;
+}
+
+.roundbutton {
+    border-radius: 10px;
+}
+
+.cereal-amount {
+    font-weight: bold;
 }

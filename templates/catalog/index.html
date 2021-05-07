@@ -4,19 +4,21 @@
     <title>Catalog</title>
 </head>
 {% block content %}
+<body>
     <link rel="stylesheet" href="{% static 'css/catalog.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <script src="{% static 'jquery/dist/jquery.js' %}"></script>
     <script src="{% static 'js/catalog.js' %}"></script>
     <h1>This is the Catalog</h1>
     <label for="filter">Filter by: </label>
     <span id="filter">
-        <button onclick = "sortOrFilterBy(healthy)" >Healthy </button>
-        <button onclick = "sortOrFilterBy(sugary)" >Sugary</button>
+        <button class="button" onclick = "sortOrFilterBy(healthy)" >Healthy </button>
+        <button class="button" onclick = "sortOrFilterBy(sugary)" >Sugary</button>
     </span>
     <label for="sort">Sort by: </label>
     <span id="sort">
-        <button onclick = "sortOrFilterBy(price)">Price</button>
-        <button onclick = "sortOrFilterBy(name)">Name</button>
+        <button class="button" onclick = "sortOrFilterBy(price)">Price</button>
+        <button class="button" onclick = "sortOrFilterBy(name)">Name</button>
     </span>
     <label for="search">Search: </label>
         <input type="search" id="search" placeholder="search" name="search"/>
@@ -25,19 +27,20 @@
     <div class = "catalog-container">
         {% for cereal in cereals %}
         <div class = "cereal-container">
-            <a href="products/{{ cereal.id }}">
+            <a class="border-button" href="products/{{ cereal.id }}">
                 <img src="{{ cereal.productimage_set.first.image }}" class="cereal-img"/>
             </a>
             <h3>{{ cereal.name }}</h3>
             <script>cereals["{{ cereal.name }}"] = 0;</script>
+            <p style="display: inline; font-weight: bold">{{ cereal.price }} kr.</p>
             <div>
-                <p style="display: inline">{{ cereal.price }}</p>
-                <button onclick='decrement("{{ cereal.name }}")'>-</button>
+                <button class="button roundbutton" onclick='decrement("{{ cereal.name }}")'>-</button>
                 <p class="cereal-amount" id="{{ cereal.name }} amount">0</p>
-                <button onclick='increment("{{ cereal.name }}")'>+</button>
-                <button onclick='sendToCart("{{ cereal.name }}")'>Cart</button>
+                <button class="button roundbutton" onclick='increment("{{ cereal.name }}")'>+</button>
+                <button class="button" onclick='sendToCart("{{ cereal.name }}")'><i class="bi bi-basket"></i></button>
             </div>
         </div>
         {% endfor %}
     </div>
+</body>
 {% endblock %}

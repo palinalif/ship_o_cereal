@@ -6,32 +6,36 @@ html, body {
     float:left;
 }
 .cereal-cart-info-box {
-    background-color: #ededed;
-    border: dimgrey 2px solid;
+    background-color: #ff9999;
     padding:5px;
     margin:10px;
     overflow: auto;
 }
 
+
+
 img {
     height:200px;
     width:200px;
     float:left;
+    padding-right: 15px;
 }
 
 #right-side-container {
     margin:10px;
-    background-color: #edd1a1;
+    background-color:  #f2ad60;
     display:inline-block;
     height: 100%;
     width:38.5%;
 }
 
 #user-info-container {
-    background-color: #deab54;
+    background-color: #f69732;
     width:50%;
     margin-left:25%;
+    padding:10px;
 }
+
 #button-container {
     width:75%;
     margin-left:auto;
@@ -81,6 +85,10 @@ img {
 
 .del-button {
     float:right;
+    border:none;
+    background-color: transparent;
+    font-weight: bold;
+    font-size: 1.25em;
 }
 
 #receipt-container {
