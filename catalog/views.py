@@ -52,9 +52,3 @@ def index(request):
 
         return JsonResponse({'data': cereals})
     return render(request, 'catalog/index.html', context=({'cereals': getCereals()}))
-
-def sortedBy(request, att):
-    return render(request, 'catalog/index.html', context=({'cereals': getSortedBy(att)}))
-
-def filterBy(request, label):
-    return render(request, 'catalog/index.html', context=({'cereals': getFilterBy(label)}))
