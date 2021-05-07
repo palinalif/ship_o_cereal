@@ -33,7 +33,10 @@
 infinite;
 }
 
-
+/*Decides background color for the WHOLE SITE*/
+body {
+    background-color: #f8eded;
+}
 
 
 /*

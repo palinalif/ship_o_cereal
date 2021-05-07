@@ -3,5 +3,6 @@ from . import views
 
 urlpatterns = [
     #http://localhost:8000/cart
-    path('', views.index, name="login-index")
+    path('', views.index, name="login-index"),
+    path('loginUser', views.loginUser, name='loginUser')
 ]
