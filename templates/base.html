@@ -23,10 +23,10 @@
                   <li><a href="{% url 'catalog-page' %}"><i class="bi bi-shop"></i> Catalog</a></li>
                   <li><a href="{% url 'cart-index' %}"><i class="bi bi-basket"></i> Cart</a></li>
                   {% if user.is_authenticated %}
-                    <li><a href="{% url 'logout' %}"><i class="bi bi-basket"></i> Logout</a></li>
+                    <li><a href="{% url 'logout' %}"><i class="bi bi-box-arrow-left"></i> Logout</a></li>
                   {% else %}
                     <li><a href="{% url 'login' %}"><i class="bi bi-person-circle"></i> Login</a></li>
-                    <li><a href="{% url 'register' %}"><i class="bi bi-person-circle"></i> Register</a></li>
+                    <li><a href="{% url 'register' %}"><i class="bi bi-person-plus-fill"></i> Register</a></li>
                   {% endif %}
               </ul>
           </div><!-- /.navbar-collapse -->

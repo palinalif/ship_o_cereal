@@ -18,3 +18,12 @@ class AccountRegisterForm(ModelForm):
             'country': widgets.Select(attrs = {'class': 'form-control'}),
             'phone': widgets.TextInput(attrs={'class': 'form-control'}),
         }
+
+class loginCreateForm(ModelForm):
+    class Meta:
+        model = User
+        exclude = ['id']
+        widgets = {
+            'email': widgets.TextInput(attrs={'class': 'form-control'}),
+            'password': widgets.TextInput(attrs={'class': 'form-control'}),
+        }
