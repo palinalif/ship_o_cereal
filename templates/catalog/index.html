@@ -31,12 +31,12 @@
             </a>
             <h3>{{ cereal.name }}</h3>
             <script>cereals["{{ cereal.name }}"] = 0;</script>
+            <p style="display: inline; font-weight: bold">{{ cereal.price }} kr.</p>
             <div>
-                <p style="display: inline">{{ cereal.price }}</p>
-                <button class="button" onclick='decrement("{{ cereal.name }}")'>-</button>
+                <button class="button roundbutton" onclick='decrement("{{ cereal.name }}")'>-</button>
                 <p class="cereal-amount" id="{{ cereal.name }} amount">0</p>
-                <button class="button" onclick='increment("{{ cereal.name }}")'>+</button>
-                <button class="button" onclick='sendToCart("{{ cereal.name }}")'>Cart</button>
+                <button class="button roundbutton" onclick='increment("{{ cereal.name }}")'>+</button>
+                <button class="button" onclick='sendToCart("{{ cereal.name }}")'><i class="bi bi-basket"></i></button>
             </div>
         </div>
         {% endfor %}

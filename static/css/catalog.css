@@ -64,8 +64,19 @@
 
 .button{
     background-color: #f2ad60;
+    border: none;
+    box-shadow: #a6a6a6 1px 1px;
+    text-decoration: none;
+}
+
+.roundbutton {
+    border-radius: 10px;
 }
 
 #body{
     background-color: #f8eded;
+}
+
+.cereal-amount {
+    font-weight: bold;
 }
