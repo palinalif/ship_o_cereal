@@ -8,7 +8,7 @@ cart = {}
 #Let's say that we already have the user that's logged in with this dictionary
 user_info = {
     'id': 1,
-    'name': 'Test User',
+    'name': 'Test user',
     'email': 'user@testuser.com',
     'phone': '123-4567',
     'password': 'dfjajfauwr89428934d',
@@ -23,14 +23,14 @@ user_info = {
 cards = [
     {
         'userId':1,
-        'cardHolderName':'Test User',
+        'cardHolderName':'Test user',
         'cardNumber':377337278995056,
         'expDate':"0122",
         'cvc':123
     },
     {
         'userId':1,
-        'cardHolderName':'Test User',
+        'cardHolderName':'Test user',
         'cardNumber':342935602344123,
         'expDate':"1125",
         'cvc':456
