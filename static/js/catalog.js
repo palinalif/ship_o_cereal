@@ -68,7 +68,6 @@ $(document).ready(function() {
     $('.sortBtn').on('click', function(e) {
         e.preventDefault();
         var searchText = $(this).val();
-        console.log(searchText)
         $.ajax({
             url: '?sort=' + searchText,
             type: 'GET',
@@ -81,10 +80,10 @@ $(document).ready(function() {
                         <h3>${d.name}</h3>
                         <div>
                             <p style="display: inline; font-weight: bold">${d.price}</p>
-                            <button class="button roundbutton" onClick="decrement(${d.name})">-</button>
+                            <button class="button roundbutton" onClick="decrement('${d.name}')">-</button>
                             <p class="cereal-amount" id="${d.name} amount">${cereals[d.name]}</p>
-                            <button class="button roundbutton" onClick="increment(${d.name})">+</button>
-                            <button class="button" onClick="sendToCart(${d.name})">Cart</button>
+                            <button class="button roundbutton" onClick="increment('${d.name}')">+</button>
+                            <button class="button" onClick="sendToCart('${d.name}')">Cart</button>
                         </div>
                     </div>`
                 });
@@ -116,10 +115,10 @@ $(document).ready(function() {
                         <h3>${d.name}</h3>
                         <div>
                             <p style="display: inline; font-weight: bold">${d.price}</p>
-                            <button class="button roundbutton" onClick="decrement(${d.name})">-</button>
+                            <button class="button roundbutton" onClick="decrement('${d.name}')">-</button>
                             <p class="cereal-amount" id="${d.name} amount">${cereals[d.name]}</p>
-                            <button class="button roundbutton" onClick="increment(${d.name})">+</button>
-                            <button class="button" onClick="sendToCart(${d.name})">Cart</button>
+                            <button class="button roundbutton" onClick="increment('${d.name}')">+</button>
+                            <button class="button" onClick="sendToCart('${d.name}')">Cart</button>
                         </div>
                     </div>`
                 });
