@@ -3,9 +3,12 @@
 {% block content %}
   <link rel="stylesheet" href="{% static 'css/register.css' %}">
   <h1>Sign up now!</h1>
-  <form class="form form-horizontal" method="post">
-    {% csrf_token %}
-    {{ form }}
-    <input type="submit" class="btn btn-primary" value="Sign up">
-  </form>
+  <div class="center">
+    <form class="form" method="post">
+      {% csrf_token %}
+      {{ form }}
+      <input type="submit" class="btn btn-primary" value="Sign up">
+    </form>
+  </div>
+
 {% endblock %}
