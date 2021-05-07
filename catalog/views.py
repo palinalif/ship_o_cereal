@@ -14,6 +14,29 @@ def index(request):
             'image': c.productimage_set.first().image
         } for c in getCereals().filter(name__icontains = searchFilter)]
         return JsonResponse({'data': cereals})
+    elif 'sort' in request.GET:
+        return "sort"
+    elif 'filter' in request.GET:
+        filter = request.GET['filter']
+        print(filter)
+        if filter == 'healthy':
+            print(getCereals().filter(tag_id=1))
+            cereals = [{
+                'id': c.id,
+                'name': c.name,
+                'price': c.price,
+                'image': c.productimage_set.first().image
+            } for c in getCereals().filter(tag_id=1)]
+        else:
+            print(getCereals().filter(tag_id=2))
+            cereals = [{
+                'id': c.id,
+                'name': c.name,
+                'price': c.price,
+                'image': c.productimage_set.first().image
+            } for c in getCereals().filter(tag_id=2)]
+
+        return JsonResponse({'data': cereals})
     return render(request, 'catalog/index.html', context=({'cereals': getCereals()}))
 
 def sortedBy(request, att):
