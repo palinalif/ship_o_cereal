@@ -19,7 +19,9 @@
 
 }
 
-.border-button:hover { border-width: 5px; }
+.border-button:hover {
+    border-width: 5px;
+}
 
 .cereal-amount {
     display: inline;
@@ -69,12 +71,12 @@
     text-decoration: none;
 }
 
-.roundbutton {
-    border-radius: 10px;
+.button:hover {
+    background-color: #d99643;
 }
 
-#body{
-    background-color: #f8eded;
+.roundbutton {
+    border-radius: 10px;
 }
 
 .cereal-amount {
