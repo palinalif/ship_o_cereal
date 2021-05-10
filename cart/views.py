@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 import json
+from .forms import PayForm
+from .forms import NewCardForm
+
 # Create your views here.
 
 #Let's say that we already have the user that's logged in with this dictionary
@@ -42,7 +45,7 @@ def index(request):
 
 @login_required
 def pay(request):
-    return render(request, 'cart/pay.html', { "cards": cards } )
+    return render(request, 'cart/pay.html', { "cards": cards , "buttonForm": PayForm, "cardForm": NewCardForm} )
 
 @login_required
 def review(request):

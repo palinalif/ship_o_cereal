@@ -12,8 +12,6 @@ html, body {
     overflow: auto;
 }
 
-
-
 img {
     height:200px;
     width:200px;
@@ -66,7 +64,7 @@ img {
 }
 
 #card-info {
-    background-color: #adadad;
+    background-color: #ff9999;
     width:20%;
     margin:10px;
     overflow: auto;
@@ -106,4 +104,11 @@ img {
 
 #receipt-button {
     padding: 0.5em 2em;
+}
+
+#card-info li {
+    list-style-type: none;
+    list-style-position:inside;
+    margin:0;
+    padding:0;
 }
