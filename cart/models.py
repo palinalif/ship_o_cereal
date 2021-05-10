@@ -1,6 +1,6 @@
 from django.db import models
 from products.models import Product
-from register.models import Order
+from user.models import Order
 
 # Create your models here.
 

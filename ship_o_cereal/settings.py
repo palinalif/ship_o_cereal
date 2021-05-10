@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'cart.apps.CartConfig',
     'products.apps.ProductsConfig',
-    'register.apps.RegisterConfig',
     'user.apps.UserConfig',
     'django_countries'
 ]
@@ -81,7 +80,7 @@ WSGI_APPLICATION = 'ship_o_cereal.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'cereal-o-ship',
+        'NAME': 'cereal-o-ship-2',
         'USER': 'cereal-o-ship-db-user',
         'PASSWORD': 'ABC.12345',
         'HOST': '34.105.143.196',
@@ -132,7 +131,7 @@ STATICFILES_DIRS = [
 ]
 
 LOGIN_URL = '/user/login'
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/user/profile'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

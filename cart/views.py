@@ -6,6 +6,7 @@ import json
 from .forms import PayForm
 from .forms import NewCardForm
 
+from cart.models import Order, OrderItem, Product
 # Create your views here.
 
 #Let's say that we already have the user that's logged in with this dictionary
@@ -63,6 +64,7 @@ def pay(request):
             request.session['PayFormData'] = pay_form.cleaned_data
             return HttpResponseRedirect(reverse('review'))
     return render(request, 'cart/pay.html', {"cards": cards , "buttonForm": pay_form, "cardForm": new_card_form})
+
 
 @login_required
 def review(request):

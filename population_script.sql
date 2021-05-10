@@ -1,15 +1,17 @@
 TRUNCATE TABLE products_producttag RESTART IDENTITY CASCADE;
 TRUNCATE TABLE products_productmanufacturer RESTART IDENTITY CASCADE;
 
-INSERT INTO register_address ("country", "city", "houseNumber", "streetName", "postNumber") VALUES ('Iceland', 'Hafnarfjörður', 22, 'Blikaás', 221);
-INSERT INTO register_address ("country", "city", "houseNumber", "streetName", "postNumber") VALUES ('Iceland', 'Reykjavík', 16, 'Austurstræti', 101);
-INSERT INTO register_address ("country", "city", "houseNumber", "streetName", "postNumber") VALUES ('Iceland', 'Hafnarfjörður', 16, 'Breiðvangur', 220);
-INSERT INTO register_address ("country", "city", "houseNumber", "streetName", "postNumber") VALUES ('Iceland', 'Hafnarfjörður', 41, 'Miðvangur', 220);
+INSERT INTO user_address ("country", "city", "houseNumber", "streetName", "postNumber") VALUES
+('Iceland', 'Hafnarfjörður', 22, 'Blikaás', 221),
+('Iceland', 'Reykjavík', 16, 'Austurstræti', 101),
+('Iceland', 'Hafnarfjörður', 16, 'Breiðvangur', 220),
+('Iceland', 'Hafnarfjörður', 41, 'Miðvangur', 220);
 
-INSERT INTO register_user ("name", "email", "password", "phone", "photo", "address_id") VALUES ('Daníel Örn Sigurðsson', 'daniels19@ru.is', 'ABC.12345', 6986320, 'https://miniblogcore.azurewebsites.net/blog/some-url/', 1);
-INSERT INTO register_user ("name", "email", "password", "phone", "photo", "address_id") VALUES ('Garpur Hnévill', 'garpurH19@ru.is', 'ABC.1234', 6986321, 'https://miniblogcore.azurewebsites.net/blog/some-url/', 2);
-INSERT INTO register_user ("name", "email", "password", "phone", "photo", "address_id") VALUES ('Jón Jónsson', 'jón19@ru.is', 'ABC.123', 6986322, 'https://miniblogcore.azurewebsites.net/blog/some-url/', 3);
-INSERT INTO register_user ("name", "email", "password", "phone", "photo", "address_id") VALUES ('Gunnar Ingvarsson', 'gunnar19@ru.is', 'ABC.12', 6986323, 'https://miniblogcore.azurewebsites.net/blog/some-url/', 4);
+INSERT INTO user_profile ("name", "email", "phone", "photo", "address_id", "user_id") VALUES
+('Daníel Örn Sigurðsson', 'daniels19@ru.is', 6986320, 'https://miniblogcore.azurewebsites.net/blog/some-url/', 1, 1),
+('Garpur Hnévill', 'garpurH19@ru.is', 6986321, 'https://miniblogcore.azurewebsites.net/blog/some-url/', 2, 2),
+('Jón Jónsson', 'jón19@ru.is', 6986327, 'https://miniblogcore.azurewebsites.net/blog/some-url/', 3, 3),
+('Gunnar Ingvarsson', 'gunnar19@ru.is', 6986323, 'https://miniblogcore.azurewebsites.net/blog/some-url/', 4, 4);
 
 INSERT INTO products_productmanufacturer (name) VALUES
 ('General Mills'),
@@ -47,22 +49,22 @@ INSERT INTO products_productimage (image, product_id) VALUES
 --(1, 1, 9);
 
 
-INSERT INTO register_order ("status", "userID_id") VALUES ('done', 1);
-INSERT INTO register_order ("status", "userID_id") VALUES ('done', 2);
-INSERT INTO register_order ("status", "userID_id") VALUES ('done', 3);
-INSERT INTO register_order ("status", "userID_id") VALUES ('in progress', 1);
+INSERT INTO user_order ("status", "profile_id") VALUES ('done', 1);
+INSERT INTO user_order ("status", "profile_id") VALUES ('done', 1);
+INSERT INTO user_order ("status", "profile_id") VALUES ('done', 1);
+INSERT INTO user_order ("status", "profile_id") VALUES ('in progress', 1);
 
-INSERT INTO register_paymentinfo ("cardHolder", "cardNumber", "expDate", "cvc", "userID_id") VALUES ('Daníel Örn Sigurðsson', 1234 5678 1111 1111, '1221', 121, 1);
-INSERT INTO register_paymentinfo ("cardHolder", "cardNumber", "expDate", "cvc", "userID_id") VALUES ('Garpur Hnévill', 1234 5678 2222 2222, '0522', 122, 2);
-INSERT INTO register_paymentinfo ("cardHolder", "cardNumber", "expDate", "cvc", "userID_id") VALUES ('Jón Jónsson', 1234 5678 3333 3333, '0523', 124, 3);
-INSERT INTO register_paymentinfo ("cardHolder", "cardNumber", "expDate", "cvc", "userID_id") VALUES ('Gunnar Ingvarsson', 1234 5678 4444 4444, '0524', 124, 4);
+INSERT INTO user_paymentinfo ("cardHolder", "cardNumber", "expDate", "cvc", "profile_id") VALUES ('Daníel Örn Sigurðsson', 1234 5678 1111 1111, '1221', 121, 1);
+INSERT INTO user_paymentinfo ("cardHolder", "cardNumber", "expDate", "cvc", "profile_id") VALUES ('Garpur Hnévill', 1234 5678 2222 2222, '0522', 122, 2);
+INSERT INTO user_paymentinfo ("cardHolder", "cardNumber", "expDate", "cvc", "profile_id") VALUES ('Jón Jónsson', 1234 5678 3333 3333, '0523', 124, 3);
+INSERT INTO user_paymentinfo ("cardHolder", "cardNumber", "expDate", "cvc", "profile_id") VALUES ('Gunnar Ingvarsson', 1234 5678 4444 4444, '0524', 124, 4);
 
-INSERT INTO register_searchhistory ("query", "date", "userID_id") VALUES ('Daníel Örn Sigurðsson', 21, 1);
-INSERT INTO register_searchhistory ("query", "date", "userID_id") VALUES ('Garpur Hnévill', 22, 2);
-INSERT INTO register_searchhistory ("query", "date", "userID_id") VALUES ('Jón Jónsson', 23, 3);
-INSERT INTO register_searchhistory ("query", "date", "userID_id") VALUES ('Gunnar Ingvarsson', 24, 4);
+INSERT INTO user_searchhistory ("query", "date", "profile_id") VALUES ('Daníel Örn Sigurðsson', 21, 1);
+INSERT INTO user_searchhistory ("query", "date", "profile_id") VALUES ('Garpur Hnévill', 22, 2);
+INSERT INTO user_searchhistory ("query", "date", "profile_id") VALUES ('Jón Jónsson', 23, 3);
+INSERT INTO user_searchhistory ("query", "date", "profile_id") VALUES ('Gunnar Ingvarsson', 24, 4);
 
-INSERT INTO cart_orderitem ("quantity", "order_id", "product_id") VALUES ('2', 1, 1);
-INSERT INTO cart_orderitem ("quantity", "order_id", "product_id") VALUES ('2', 1, 2);
-INSERT INTO cart_orderitem ("quantity", "order_id", "product_id") VALUES ('1', 2, 3);
-INSERT INTO cart_orderitem ("quantity", "order_id", "product_id") VALUES ('1', 4, 4);
+INSERT INTO cart_orderitem ("quantity", "user_order_id", "product_id") VALUES ('2', 1, 1);
+INSERT INTO cart_orderitem ("quantity", "user_order_id", "product_id") VALUES ('2', 1, 2);
+INSERT INTO cart_orderitem ("quantity", "user_order_id", "product_id") VALUES ('1', 2, 3);
+INSERT INTO cart_orderitem ("quantity", "user_order_id", "product_id") VALUES ('1', 4, 4);
