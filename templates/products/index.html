@@ -25,8 +25,11 @@
         <button class="bigButton" > Go Back </button>
         <button class="bigButton" > Add to cart </button>
     </div>
-    <a id= "deleteButton" href="{% url 'delete_product' cereal.id %}" class="block btn btn-primary">Delete Product</a>
-    <a id= "updateButton" href="{% url 'update_product' cereal.id %}" class="block btn btn-primary">update Product</a>
+    {% if user.is_authenticated %}
+    <a id= "deleteButton" href="{% url 'delete-product' cereal.id %}" class="block btn btn-primary">Delete Product</a>
+    <a id= "updateButton" href="{% url 'update-product' cereal.id %}" class="block btn btn-primary">Update Product</a>
+    <a id= "createButton" href="{% url 'create-product' %}" class="block btn btn-primary">Create Product</a>
+    {% endif %}
 
 <script src="{% static 'js/products.js' %}"></script>
 {% endblock %}
