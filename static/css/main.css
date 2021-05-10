@@ -47,3 +47,10 @@ body {
 infinite;
 }
 */
+
+.profile-image{
+    display: inline-block;
+    width: 310px;
+    height: 100px;
+    margin: 10px;
+}
