@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 import json
+from cart.models import Order, OrderItem, Product
 # Create your views here.
 
 #Let's say that we already have the user that's logged in with this dictionary
@@ -38,6 +39,14 @@ cards = [
 
 @login_required
 def index(request):
+    if 'amount' in request.POST:
+        cereal = request.POST['id']
+        amount = request.POST['amount']
+        return JsonResponse({'data': 123})
+
+
+
+
     return render(request, 'cart/index.html', user_info )
 
 @login_required

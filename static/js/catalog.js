@@ -1,28 +1,31 @@
 let cereals = {}
 
-function decrement(cerealName) {
-    if (cereals[cerealName] > 0) cereals[cerealName]--;
-    updateAmount(cerealName);
+function decrement(cerealID) {
+    if (cereals[cerealID] > 0) cereals[cerealID]--;
+    updateAmount(cerealID);
 }
 
-function increment(cerealName) {
-    cereals[cerealName]++;
-    updateAmount(cerealName);
+function increment(cerealID) {
+    cereals[cerealID]++;
+    updateAmount(cerealID);
 }
 
-function updateAmount(cerealName) {
-    document.getElementById(cerealName + " amount").textContent = cereals[cerealName];
+function updateAmount(cerealID) {
+    document.getElementById(cerealID + " amount").textContent = cereals[cerealID];
 }
 
-function sendToCart(cerealName) {
+function sendToCart(cerealID) {
     $.ajax({
-        method: 'POST',
-        url: "{ % url 'cart-index' % }",
-        data: {'name': cerealName, 'amount': document.getElementById(cerealName + " amount").textContent},
+        headers: {'X-CSRFToken': csrftoken},
+        type: 'POST',
+        url: cartIndex,
+        data: {'id': cerealID, 'amount': document.getElementById(cerealID + " amount").textContent},
         success: function (data) {
              //this gets called when server returns an OK response
              alert("it worked!");
-             updateAmount(cerealName);
+             cereals[cerealID] = 0;
+             updateAmount(cerealID);
+             console.log(data);
         },
         error: function (data) {
              alert("it didnt work\n" + data);
@@ -46,10 +49,10 @@ $(document).ready(function() {
                         <h3>${d.name}</h3>
                         <div>
                             <p style="display: inline; font-weight: bold">${d.price}</p>
-                            <button class="button roundbutton" onClick="decrement('${d.name}')">-</button>
-                            <p class="cereal-amount" id="${d.name} amount">${cereals[d.name]}</p>
-                            <button class="button roundbutton" onClick="increment('${d.name}')">+</button>
-                            <button class="button" onClick="sendToCart('${d.name}')">Cart</button>
+                            <button class="button roundbutton" onClick="decrement('${d.id}')">-</button>
+                            <p class="cereal-amount" id="${d.id} amount">${cereals[d.id]}</p>
+                            <button class="button roundbutton" onClick="increment('${d.id}')">+</button>
+                            <button class="button" onClick="sendToCart('${d.id}')">Cart</button>
                         </div>
                     </div>`
                 });
@@ -80,10 +83,10 @@ $(document).ready(function() {
                         <h3>${d.name}</h3>
                         <div>
                             <p style="display: inline; font-weight: bold">${d.price}</p>
-                            <button class="button roundbutton" onClick="decrement('${d.name}')">-</button>
-                            <p class="cereal-amount" id="${d.name} amount">${cereals[d.name]}</p>
-                            <button class="button roundbutton" onClick="increment('${d.name}')">+</button>
-                            <button class="button" onClick="sendToCart('${d.name}')">Cart</button>
+                            <button class="button roundbutton" onClick="decrement('${d.id}')">-</button>
+                            <p class="cereal-amount" id="${d.id} amount">${cereals[d.id]}</p>
+                            <button class="button roundbutton" onClick="increment('${d.id}')">+</button>
+                            <button class="button" onClick="sendToCart('${d.id}')">Cart</button>
                         </div>
                     </div>`
                 });
@@ -115,10 +118,10 @@ $(document).ready(function() {
                         <h3>${d.name}</h3>
                         <div>
                             <p style="display: inline; font-weight: bold">${d.price}</p>
-                            <button class="button roundbutton" onClick="decrement('${d.name}')">-</button>
-                            <p class="cereal-amount" id="${d.name} amount">${cereals[d.name]}</p>
-                            <button class="button roundbutton" onClick="increment('${d.name}')">+</button>
-                            <button class="button" onClick="sendToCart('${d.name}')">Cart</button>
+                            <button class="button roundbutton" onClick="decrement('${d.id}')">-</button>
+                            <p class="cereal-amount" id="${d.id} amount">${cereals[d.id]}</p>
+                            <button class="button roundbutton" onClick="increment('${d.id}')">+</button>
+                            <button class="button" onClick="sendToCart('${d.id}')">Cart</button>
                         </div>
                     </div>`
                 });
