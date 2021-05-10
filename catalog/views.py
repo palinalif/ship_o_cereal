@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 
-from products.views import getCereals, getSortedBy, getFilterBy
+from products.views import getCereals
 
 # Create your views here.
 def index(request):
