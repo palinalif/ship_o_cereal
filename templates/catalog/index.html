@@ -5,6 +5,11 @@
 </head>
 {% block content %}
 <body>
+    {% csrf_token %}
+    <script>
+    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    const cartIndex = "{% url 'cart-index' %}";
+    </script>
     <link rel="stylesheet" href="{% static 'css/catalog.css' %}">
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <script src="{% static 'jquery/dist/jquery.js' %}"></script>
@@ -31,13 +36,13 @@
                 <img src="{{ cereal.productimage_set.first.image }}" class="cereal-img"/>
             </a>
             <h3>{{ cereal.name }}</h3>
-            <script>cereals["{{ cereal.name }}"] = 0;</script>
+            <script>cereals["{{ cereal.id }}"] = 0;</script>
             <p style="display: inline; font-weight: bold">{{ cereal.price }} kr.</p>
             <div>
-                <button class="button roundbutton" onclick='decrement("{{ cereal.name }}")'>-</button>
-                <p class="cereal-amount" id="{{ cereal.name }} amount">0</p>
-                <button class="button roundbutton" onclick='increment("{{ cereal.name }}")'>+</button>
-                <button class="button" onclick='sendToCart("{{ cereal.name }}")'><i class="bi bi-basket"></i></button>
+                <button class="button roundbutton" onclick='decrement("{{ cereal.id }}")'>-</button>
+                <p class="cereal-amount" id="{{ cereal.id }} amount">0</p>
+                <button class="button roundbutton" onclick='increment("{{ cereal.id }}")'>+</button>
+                <button class="button" onclick='sendToCart("{{ cereal.id }}")'><i class="bi bi-basket"></i></button>
             </div>
         </div>
         {% endfor %}

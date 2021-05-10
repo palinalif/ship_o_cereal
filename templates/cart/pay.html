@@ -4,8 +4,9 @@
     <title>Catalog</title>
 </head>
 {% block content %}
+
     <link rel="stylesheet" href="{% static 'css/cart.css' %}">
-    <div id = "card-info">
+    <!--<div id = "card-info">
         <h3 id = "pay-with-header">Pay with:</h3>
         {% for card in cards %}
             <input type="radio" id = "card {{ forloop.counter}}" name = "cards" value = "card {{ forloop.counter }}" onclick="yesnoCheck();">
@@ -66,7 +67,17 @@
             <input type="checkbox" id = "save-card">
             <br/>
         </form>
+    </div>-->
+    <form id = "card-info">
+        {{ buttonForm }}
+    </form>
+    <div id = "register-card">
+        <h3>New Card:</h3>
+        <form>
+            {{ cardForm }}
+        </form>
     </div>
+
     <!-- TODO: Send card info along -->
     <form action = "{% url 'cart-index' %}" class = "button-form">
         <button type = "submit">Go Back</button>
@@ -75,6 +86,5 @@
         <button type = "submit">Confirm</button>
     </form>
 
-    <!-- TODO: Put script in a different file -->
     <script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
 {% endblock %}

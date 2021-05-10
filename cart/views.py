@@ -2,6 +2,10 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 import json
+from .forms import PayForm
+from .forms import NewCardForm
+
+from cart.models import Order, OrderItem, Product
 # Create your views here.
 
 #Let's say that we already have the user that's logged in with this dictionary
