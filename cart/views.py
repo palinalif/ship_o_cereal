@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseRedirect
+from django.urls import reverse
 import json
 from .forms import PayForm
 from .forms import NewCardForm
@@ -45,7 +46,23 @@ def index(request):
 
 @login_required
 def pay(request):
-    return render(request, 'cart/pay.html', { "cards": cards , "buttonForm": PayForm, "cardForm": NewCardForm} )
+    pay_form = PayForm(request.POST or None, initial = request.session.get('PayFormData'))
+    if request.method == 'POST':
+        if pay_form.is_valid():
+            #process data, save in session
+            request.session.save()
+            request.session['PayFormData'] = pay_form.cleaned_data
+            return HttpResponseRedirect(reverse('review'))
+    new_card_form = NewCardForm(request.POST or None, initial=request.session.get('NewCardFormData'))
+    if request.method == 'POST':
+        if new_card_form.is_valid():
+            # process data, save in session
+            request.session.save()
+            request.session['NewCardFormData'] = new_card_form.cleaned_data
+            # To save the fact that you chose new card
+            request.session['PayFormData'] = pay_form.cleaned_data
+            return HttpResponseRedirect(reverse('review'))
+    return render(request, 'cart/pay.html', {"cards": cards , "buttonForm": pay_form, "cardForm": new_card_form})
 
 @login_required
 def review(request):
