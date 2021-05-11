@@ -8,12 +8,12 @@
     <div id = "cereal-container">
         {% csrf_token %}
         <script>
-            var total = 0;
+            var prices = {};
             const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
             const removeIndex = "{% url 'removeFromCart' %}";
         </script>
         {% for item in items %}
-        <div class = "cereal-cart-info-box">
+        <div class = "cereal-cart-info-box" id = "{{ item.product.id }}container">
             <button class = "del-button" value="{{ item.product.id }}">X</button>
             <img src="{{ item.product.productimage_set.first.image }}"/>
             <h3>{{ item.product.name }}</h3>
@@ -21,7 +21,7 @@
                 <p>Amount: {{ item.quantity }}</p>
                 <p>Price: {{ item.quantity|mul:item.product.price }} kr.</p>
                 <script>
-                    total += {{ item.quantity|mul:item.product.price }};
+                    prices[{{ item.product.id }}] = {{ item.quantity|mul:item.product.price }};
                 </script>
             </div>
         </div>
@@ -30,7 +30,7 @@
     <div id = "right-side-container">
         <h2 id = "total-header"></h2>
         <script>
-            document.getElementById("total-header").innerText = "Total: " + total + "kr.";
+            updateTotal();
         </script>
         <div id = "user-info-container">
             <p>Name: {{ profile.name }}</p>
