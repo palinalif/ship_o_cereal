@@ -10,5 +10,6 @@ urlpatterns = [
     path('review/', views.review, name="review"),
     #http://localhost:8000/cart/receipt
     path('receipt/', views.receipt, name="receipt"),
-    # path('addToCart/', views.addToCart)
+
+    path('addToCart/', views.addToCart, name="addToCart")
 ]
