@@ -7,7 +7,8 @@ from .forms import PayForm
 from .forms import NewCardForm
 from user.models import Profile, Address, PaymentInfo
 
-from cart.models import Order, OrderItem, Product
+from user.models import Profile, Order, Address
+from cart.models import OrderItem, Product
 # Create your views here.
 
 def construct_user_dict(request):
@@ -40,15 +41,43 @@ def construct_card_dict(request):
 
 @login_required
 def index(request):
-    user_info = construct_user_dict(request)
-    return render(request, 'cart/index.html', user_info)
+    profile = Profile.objects.filter(user=request.user).first()
+    order = Order.objects.filter(profile=profile, status='In Progress').first()
+    return render(request, 'cart/index.html', {
+        'profile': profile,
+        'address': profile.address,
+        'items': OrderItem.objects.filter(order=order)
+    })
 
 def addToCart(request):
     if request.user.is_authenticated:
-        # Add to the database to the cart
-        print(request.POST['amount'])
-        return JsonResponse({'amount': request.POST['amount'], 'id': request.POST['id']})
+        profile = Profile.objects.filter(user=request.user).first()
+        order = Order.objects.filter(profile=profile, status='In Progress').first()
+        if order is None:
+            order = Order()
+            order.profile = profile
+            order.status = 'In Progress'
+        product = Product.objects.filter(id=request.POST['id']).first()
+        item = OrderItem.objects.filter(order=order, product=product).first()
+        if item is None:
+            item = OrderItem()
+            item.product = product
+            item.quantity = int(request.POST['amount'])
+            item.order = order
+        else:
+            item.quantity += int(request.POST['amount'])
+        order.save()
+        item.save()
+        return JsonResponse({'amount': item.quantity, 'id': request.POST['id']})
 
+def removeFromCart(request):
+    if request.user.is_authenticated:
+        profile = Profile.objects.filter(user=request.user).first()
+        order = Order.objects.filter(profile=profile, status='In Progress').first()
+        product = Product.objects.filter(id=request.POST['id']).first()
+        item = OrderItem.objects.filter(order=order, product=product).first()
+        item.delete()
+        return JsonResponse({'id': request.POST['id']})
 
 @login_required
 def pay(request):

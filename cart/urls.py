@@ -11,5 +11,6 @@ urlpatterns = [
     #http://localhost:8000/cart/receipt
     path('receipt/', views.receipt, name="receipt"),
 
-    path('addToCart/', views.addToCart, name="addToCart")
+    path('addToCart/', views.addToCart, name="addToCart"),
+    path('removeFromCart/', views.removeFromCart, name="removeFromCart")
 ]
