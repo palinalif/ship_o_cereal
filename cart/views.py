@@ -34,7 +34,9 @@ def construct_card_dict(request):
             'expDate':card.expDate,
             'cvc':card.cvc
         }
+        cards.append(c)
     return cards
+
 
 @login_required
 def index(request):
@@ -50,8 +52,7 @@ def addToCart(request):
 
 @login_required
 def pay(request):
-    pay_form = PayForm(request.POST or None, initial=request.session.get('PayFormData'))
-    cards = construct_card_dict(request)
+    pay_form = PayForm(request.POST or None, initial=request.session.get('PayFormData'), request=request)
     if request.method == 'POST':
         if pay_form.is_valid():
             try:
