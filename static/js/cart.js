@@ -14,9 +14,9 @@ function yesnoCheck() {
 document.addEventListener('DOMContentLoaded', function() {
     let radioButtonList = document.getElementsByName("card_select");
     for (let item of radioButtonList) {
-        item.setAttribute("onclick","yesnoCheck()");
+        item.setAttribute("onclick","newCardCheck()");
 }
-    yesnoCheck(); //initial check
+    newCardCheck(); //initial check
 });
 
 $(document).ready(function() {

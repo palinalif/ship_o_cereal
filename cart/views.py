@@ -5,42 +5,37 @@ from django.urls import reverse
 import json
 from .forms import PayForm
 from .forms import NewCardForm
+from user.models import Profile, Address, PaymentInfo
 
 from user.models import Profile, Order, Address
 from cart.models import OrderItem, Product
 # Create your views here.
 
-#Let's say that we already have the user that's logged in with this dictionary
-user_info = {
-    'id': 1,
-    'name': 'Test user',
-    'email': 'user@testuser.com',
-    'phone': '123-4567',
-    'password': 'dfjajfauwr89428934d',
-    'streetName': 'Eitthvaðstræti',
-    'houseNumber': '69',
-    'city': 'Reykjavík',
-    'country': 'Iceland',
-    'postalCode': 109
-}
-
-#and let's say that these are their cards
-cards = [
-    {
-        'userId':1,
-        'cardHolderName':'Test user',
-        'cardNumber':377337278995056,
-        'expDate':"0122",
-        'cvc':123
-    },
-    {
-        'userId':1,
-        'cardHolderName':'Test user',
-        'cardNumber':342935602344123,
-        'expDate':"1125",
-        'cvc':456
+def construct_user_dict(request):
+    user_info = {
+        'name': request.user.profile.name,
+        'email': request.user.profile.email,
+        'phone': request.user.profile.phone,
+        'streetName': request.user.profile.address.streetName,
+        'houseNumber': request.user.profile.address.houseNumber,
+        'city': request.user.profile.address.city,
+        'country': request.user.profile.address.country,
+        'postalCode': request.user.profile.address.postNumber
     }
-]
+    return user_info
+
+def construct_card_dict(request):
+    profile = Profile.objects.filter(user=request.user).first()
+    cardQueries = PaymentInfo.objects.filter(profile=profile)
+    cards = []
+    for card in cardQueries:
+        c = {
+            'cardHolderName':card.cardHolder,
+            'cardNumber':card.cardNumber,
+            'expDate':card.expDate,
+            'cvc':card.cvc
+        }
+    return cards
 
 @login_required
 def index(request):
@@ -85,6 +80,7 @@ def removeFromCart(request):
 @login_required
 def pay(request):
     pay_form = PayForm(request.POST or None, initial=request.session.get('PayFormData'))
+    cards = construct_card_dict(request)
     if request.method == 'POST':
         if pay_form.is_valid():
             try:
@@ -115,11 +111,13 @@ def pay(request):
             # saves the new card form in session
             request.session['NewCardFormData'] = new_card_form.cleaned_data
             return HttpResponseRedirect(reverse('review'))
-    return render(request, 'cart/pay.html', {"cards": cards, "buttonForm": pay_form, "cardForm": new_card_form})
+    return render(request, 'cart/pay.html', {"buttonForm": pay_form, "cardForm": new_card_form})
 
 
 @login_required
 def review(request):
+    user_info = construct_user_dict(request)
+    cards = construct_card_dict(request)
     try:
         if request.session['selected_card']:
             card_num = request.session['selected_card']
@@ -130,6 +128,7 @@ def review(request):
 
 @login_required
 def receipt(request):
+    user_info = construct_user_dict(request)
     return render(request, 'cart/receipt.html', user_info)
 
 
