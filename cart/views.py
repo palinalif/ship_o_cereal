@@ -42,7 +42,15 @@ cards = [
 
 @login_required
 def index(request):
+    # if 'amount' in request.POST:
+    #     cereal = request.POST['id']
+    #     amount = request.POST['amount']
+    #     return JsonResponse({'data': 123})
+
     return render(request, 'cart/index.html', user_info )
+
+def addToCart(request):
+    print(request.user.email)
 
 @login_required
 def pay(request):
