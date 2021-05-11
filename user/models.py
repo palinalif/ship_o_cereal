@@ -10,6 +10,9 @@ class Address(models.Model):
     streetName = models.CharField(max_length=255)
     postNumber = models.IntegerField()
 
+    def __str__(self):
+        return str(self.country)
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
@@ -34,3 +37,43 @@ class Order(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     status = models.CharField(max_length = 255)
     dateCreated = models.DateTimeField(auto_now_add = True)
+
+def profile1(request):
+    profile = Profile.objects.filter(user=request.user).first()
+    if request.method == 'POST':
+        form = ProfileForm(instance=profile, data=request.POST)
+        if form.is_valid():
+            profile = form.save(commit=False)
+            profile.user = request.user
+            profile.save()
+            return redirect('profile')
+    return render(request, 'user/profile.html', {
+        'form': ProfileForm(instance=profile)})
+
+def profile(request):
+    profile = Profile.objects.filter(user=request.user).first()
+    if request.method == 'POST':
+        form = ProfileForm(instance=profile, data=request.POST)
+        if form.is_valid():
+            address_instance = Address()
+            address_instance.country = request.POST['country']
+            address_instance.city = request.POST['city']
+            address_instance.houseNumber = request.POST['houseNumber']
+            address_instance.streetName = request.POST['streetName']
+            address_instance.postNumber = request.POST['postNumber']
+            profile = form.save(commit=False)
+            profile.user = request.user
+            profile.save()
+            return redirect('profile')
+    if profile is None:
+        return render(request, 'user/profile.html', {
+            'form': ProfileForm(instance=profile)})
+    return render(request, 'user/profile.html', {
+        'form': ProfileForm(instance=profile, initial={
+            'country': request.user.profile.address.country,
+            'city': request.user.profile.address.city,
+            'houseNumber': request.user.profile.address.houseNumber,
+            'streetName': request.user.profile.address.streetName,
+            'postNumber': request.user.profile.address.postNumber
+        })
+    })
