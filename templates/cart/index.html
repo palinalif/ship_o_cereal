@@ -1,42 +1,41 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load mathfilters %}
 {% block content %}
     <link rel="stylesheet" href="{% static 'css/cart.css' %}">
+    <script src="{% static 'jquery/dist/jquery.js' %}"></script>
+    <script src="{% static 'js/cart.js' %}"></script>
     <div id = "cereal-container">
+        {% csrf_token %}
+        <script>
+            var total = 0;
+            const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+            const removeIndex = "{% url 'removeFromCart' %}";
+        </script>
+        {% for item in items %}
         <div class = "cereal-cart-info-box">
-            <button class = "del-button">X</button>
-            <img src="https://images-na.ssl-images-amazon.com/images/I/81VQIHQ0-CL._SL1500_.jpg"/>
-            <h3>Cheerios</h3>
+            <button class = "del-button" value="{{ item.product.id }}">X</button>
+            <img src="{{ item.product.productimage_set.first.image }}"/>
+            <h3>{{ item.product.name }}</h3>
             <div class = "cereal-info">
-                <p>Amount: 2</p>
-                <p>Price: 1200 kr.</p>
+                <p>Amount: {{ item.quantity }}</p>
+                <p>Price: {{ item.quantity|mul:item.product.price }} kr.</p>
+                <script>
+                    total += {{ item.quantity|mul:item.product.price }};
+                </script>
             </div>
         </div>
-        <div class = "cereal-cart-info-box">
-            <button class = "del-button">X</button>
-            <img src="https://images-na.ssl-images-amazon.com/images/I/81VQIHQ0-CL._SL1500_.jpg"/>
-            <h3>Cheerios</h3>
-            <div class = "cereal-info">
-                <p>Amount: 2</p>
-                <p>Price: 1200 kr.</p>
-            </div>
-        </div>
-        <div class = "cereal-cart-info-box">
-            <button class = "del-button">X</button>
-            <img src="https://images-na.ssl-images-amazon.com/images/I/81VQIHQ0-CL._SL1500_.jpg"/>
-            <h3>Cheerios</h3>
-            <div class = "cereal-info">
-                <p>Amount: 2</p>
-                <p>Price: 1200 kr.</p>
-            </div>
-        </div>
+        {% endfor %}
     </div>
     <div id = "right-side-container">
-        <h2 id = "total-header">Total: 100000000 kr.</h2>
+        <h2 id = "total-header"></h2>
+        <script>
+            document.getElementById("total-header").innerText = "Total: " + total + "kr.";
+        </script>
         <div id = "user-info-container">
-            <p>Name: {{ name }}</p>
-            <p>Phone number: {{ phone }}</p>
-            <p>Address: {{ streetName }}  {{ houseNumber }} {{ postalCode }} {{ city }} {{ country }}</p>
+            <p>Name: {{ profile.name }}</p>
+            <p>Phone number: {{ profile.phone }}</p>
+            <p>Address: {{ address.streetName }}  {{ address.houseNumber }} {{ address.postalCode }} {{ address.city }} {{ address.country }}</p>
         </div>
         <div id = "button-container">
             <form action="{% url 'confirm-card' %}" class = "button-form">
