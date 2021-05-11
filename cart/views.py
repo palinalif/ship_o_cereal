@@ -47,28 +47,49 @@ def index(request):
 
 @login_required
 def pay(request):
-    pay_form = PayForm(request.POST or None, initial = request.session.get('PayFormData'))
+    pay_form = PayForm(request.POST or None, initial=request.session.get('PayFormData'))
     if request.method == 'POST':
         if pay_form.is_valid():
+            try:
+                del request.session['selected_card']
+                del request.session['selected_card_id']
+            except KeyError:
+                pass
+            request.session['selected_card_id'] = str(request.POST['card_select'])[4:]
             #process data, save in session
             request.session.save()
             request.session['PayFormData'] = pay_form.cleaned_data
             return HttpResponseRedirect(reverse('review'))
+
     new_card_form = NewCardForm(request.POST or None, initial=request.session.get('NewCardFormData'))
     if request.method == 'POST':
         if new_card_form.is_valid():
-            # process data, save in session
-            request.session.save()
-            request.session['NewCardFormData'] = new_card_form.cleaned_data
+            try:
+                del request.session['selected_card']
+                del request.session['selected_card_id']
+            except KeyError:
+                pass
             # To save the fact that you chose new card
             request.session['PayFormData'] = pay_form.cleaned_data
+            # process data, save in session
+            request.session.save()
+            # Saves the card number in session to be used on the next page
+            request.session['selected_card'] = request.POST['card_number']
+            # saves the new card form in session
+            request.session['NewCardFormData'] = new_card_form.cleaned_data
             return HttpResponseRedirect(reverse('review'))
-    return render(request, 'cart/pay.html', {"cards": cards , "buttonForm": pay_form, "cardForm": new_card_form})
+    return render(request, 'cart/pay.html', {"cards": cards, "buttonForm": pay_form, "cardForm": new_card_form})
 
 
 @login_required
 def review(request):
-    return render(request, 'cart/review.html', user_info)
+    try:
+        if request.session['selected_card']:
+            card_num = request.session['selected_card']
+    except KeyError:
+        card_id = request.session['selected_card_id']
+        card_num = str(cards[int(card_id) - 1]["cardNumber"])
+    return render(request, 'cart/review.html', {"user_info": user_info, "card_num": card_num})
 
 @login_required
 def receipt(request):

@@ -10,16 +10,6 @@ function yesnoCheck() {
         }
     }
 }
-function testingSubmit() {
-    if (document.getElementById('new-card').checked) {
-        // The user is using a new card
-        if (document.getElementById('save-card').checked) {
-            //save the new card
-            //TODO: Save card info
-        }
-    }
-
-}
 
 document.addEventListener('DOMContentLoaded', function() {
     let radioButtonList = document.getElementsByName("card_select");

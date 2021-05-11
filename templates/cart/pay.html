@@ -20,12 +20,8 @@
         </form>
     </div>
 
-    <!-- TODO: Send card info along (session things?)-->
     <form action = "{% url 'cart-index' %}" class = "button-form">
         <button type = "submit">Go Back</button>
-    </form>
-    <form action = "{% url 'review' %}" class = "button-form" onsubmit="testingSubmit();">
-        <button type = "submit">Confirm</button>
     </form>
 
     <script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
