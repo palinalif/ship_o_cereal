@@ -43,7 +43,14 @@ cards = [
 
 @login_required
 def index(request):
-    return render(request, 'cart/index.html', user_info )
+    return render(request, 'cart/index.html', user_info)
+
+def addToCart(request):
+    if request.user.is_authenticated:
+        # Add to the database to the cart
+        print(request.POST['amount'])
+        return JsonResponse({'amount': request.POST['amount'], 'id': request.POST['id']})
+
 
 @login_required
 def pay(request):
