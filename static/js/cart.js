@@ -19,14 +19,6 @@ document.addEventListener('DOMContentLoaded', function() {
     newCardCheck(); //initial check
 });
 
-function updateTotal() {
-    let total = 0
-    for (const [key, value] of Object.entries(prices)) {
-        total += value
-    }
-    document.getElementById("total-header").innerText = "Total: " + total + "kr.";
-}
-
 $(document).ready(function() {
     $('.del-button').on('click', function(e) {
         e.preventDefault();
@@ -38,8 +30,7 @@ $(document).ready(function() {
             data: {'id': productID},
             success: function(resp) {
                 document.getElementById(productID + "container").remove();
-                delete(prices[productID]);
-                updateTotal();
+                document.getElementById('total-header').innerText = "Total: " + resp['totalPrice'] + "kr.";
             },
             error: function(xhr, status, error) {
                 console.log(error);
