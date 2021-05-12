@@ -1,4 +1,5 @@
 from django import forms
+from django.forms import widgets, ModelForm
 from django.utils.safestring import mark_safe
 from user.models import Profile, Address, PaymentInfo
 
@@ -34,28 +35,37 @@ class PayForm(forms.Form):
         self.fields['card_select'] = forms.CharField(label='Choose a card...', widget=forms.RadioSelect(choices=CHOICES))
 
 
-class NewCardForm(forms.Form):
-    card_number = forms.CharField(label='Card Number:', max_length=100)
-    MONTH_CHOICES = [('01', 'January'),
-                     ('02', 'February'),
-                     ('03', 'March'),
-                     ('04', 'April'),
-                     ('05', 'May'),
-                     ('06', 'June'),
-                     ('07', 'July'),
-                     ('08', 'August'),
-                     ('09', 'September'),
-                     ('10', 'October'),
-                     ('11', 'November'),
-                     ('12', 'December')]
-    YEAR_CHOICES = [('21', '21'),
-                    ('22', '22'),
-                    ('23', '23'),
-                    ('24', '24'),
-                    ('25', '25')
-                    ]
-    month = forms.ChoiceField(choices=MONTH_CHOICES)
-    year = forms.ChoiceField(choices=YEAR_CHOICES)
-    cvv = forms.CharField(label='CVV:', max_length=3)
-    holder_name = forms.CharField(label='Card Holder Name:', max_length=100)
-    save_card = forms.BooleanField(required=False)
+class NewCardForm(ModelForm):
+    class Meta:
+        model = PaymentInfo
+        exclude = ['id', 'profile']
+        widgets = {
+            'cardHolder': widgets.TextInput(attrs={'class': 'form-control'}),
+            'cardNumber': widgets.TextInput(attrs={'class': 'form-control'}),
+            'expDate': widgets.TextInput(attrs={'class': 'form-control'}),
+            'cvc': widgets.TextInput(attrs={'class': 'form-control'})
+        }
+    # card_number = forms.CharField(label='Card Number:', max_length=100)
+    # MONTH_CHOICES = [('01', 'January'),
+    #                  ('02', 'February'),
+    #                  ('03', 'March'),
+    #                  ('04', 'April'),
+    #                  ('05', 'May'),
+    #                  ('06', 'June'),
+    #                  ('07', 'July'),
+    #                  ('08', 'August'),
+    #                  ('09', 'September'),
+    #                  ('10', 'October'),
+    #                  ('11', 'November'),
+    #                  ('12', 'December')]
+    # YEAR_CHOICES = [('21', '21'),
+    #                 ('22', '22'),
+    #                 ('23', '23'),
+    #                 ('24', '24'),
+    #                 ('25', '25')
+    #                 ]
+    # month = forms.ChoiceField(choices=MONTH_CHOICES)
+    # year = forms.ChoiceField(choices=YEAR_CHOICES)
+    # cvv = forms.CharField(label='CVV:', max_length=3)
+    # holder_name = forms.CharField(label='Card Holder Name:', max_length=100)
+    # save_card = forms.BooleanField(required=False)

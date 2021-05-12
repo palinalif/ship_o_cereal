@@ -104,6 +104,7 @@ def pay(request):
             return HttpResponseRedirect(reverse('review'))
 
     new_card_form = NewCardForm(request.POST or None, initial=request.session.get('NewCardFormData'))
+    newCard = PaymentInfo()
     if request.method == 'POST':
         if new_card_form.is_valid():
             try:
@@ -114,9 +115,11 @@ def pay(request):
             # To save the fact that you chose new card
             request.session['PayFormData'] = pay_form.cleaned_data
             # process data, save in session
-            request.session.save()
+            newCard = new_card_form.save(commit=False)
+            newCard.profile = request.user.profile
+            newCard.save()
             # Saves the card number in session to be used on the next page
-            request.session['selected_card'] = request.POST['card_number']
+            request.session['selected_card'] = newCard.id
             # saves the new card form in session
             request.session['NewCardFormData'] = new_card_form.cleaned_data
             return HttpResponseRedirect(reverse('review'))
