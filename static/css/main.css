@@ -33,6 +33,10 @@
 infinite;
 }
 
+/*#navBar {
+    font-size: 20px;
+}*/
+
 /*Decides background color for the WHOLE SITE*/
 body {
     background-color: #f8eded;
@@ -63,4 +67,20 @@ infinite;
   margin-left: -25%;
   height: 100%;
   width: auto;
+}
+
+#bs-example-navbar-collapse-1 {
+    width:30%;
+    float:right;
+}
+
+#bs-example-navbar-collapse-1 ul {
+    display:inline-block;
+    height:100%;
+    
+    vertical-align: center;
+}
+
+.navbar-header {
+    display:inline-block;
 }
