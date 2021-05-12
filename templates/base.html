@@ -23,7 +23,7 @@
                   <li><a href="{% url 'catalog-page' %}"><i class="bi bi-shop"></i> Catalog</a></li>
                   <li><a href="{% url 'cart-index' %}"><i class="bi bi-basket"></i> Cart</a></li>
                   {% if user.is_authenticated %}
-                    <li><a href="{% url 'profile' %}"><div id = "image-cropper"><img src={{ user.profile.photo }} class="profile-image"></div> Profile</a></li>
+                    <li><a href="{% url 'profile' %}"><div id = "profile-container"><div id = "image-cropper"><img src={{ user.profile.photo }} class="profile-image"></div> <span id =  "profile-text">Profile</span></div></a></li>
                     <li><a href="{% url 'logout' %}"><i class="bi bi-box-arrow-left"></i> Logout</a></li>
                   {% else %}
                     <li><a href="{% url 'login' %}"><i class="bi bi-person-circle"></i> Login</a></li>
