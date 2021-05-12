@@ -46,6 +46,12 @@ body {
     margin-top: 200px;
 }
 
+html{
+   margin: 0px;
+   height: 100%;
+   width: 100%;
+}
+
 
 /*
 .navbar-navbar-default {
@@ -109,7 +115,10 @@ infinite;
 }
 
 .footer{
+    position: relative;
+    bottom: 0;
     margin-top: 50px;
+    width: 100%;
     justify-content: center;
     background-color: lightcoral;
 }
