@@ -28,7 +28,19 @@
     <label for="search">Search: </label>
         <input type="search" id="search" placeholder="search" name="search"/>
         <button type="button" id="search-btn" class="btn btn-default">Search</button>
-
+        <script>
+          $( function() {
+            var availableTags = [
+                {% for query in searchHistory %}
+                    "{{query.query}}",
+                {% endfor %}
+            ];
+            $( "#search" ).autocomplete({
+              source: availableTags
+            });
+            console.log(availableTags)
+          } );
+        </script>
     <div class = "catalog-container">
         {% for cereal in cereals %}
         <div class = "cereal-container">

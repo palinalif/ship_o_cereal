@@ -135,3 +135,37 @@ $(document).ready(function() {
         })
     });
 });
+
+$(document).ready(function() {
+    $('#search-btn').on('click', function(e) {
+        e.preventDefault();
+        var searchText = $('#search').val();
+        $.ajax({
+            url: '?searchFilter=' + searchText,
+            type: 'GET',
+            success: function(resp) {
+                var newHtml = resp.data.map(d => {
+                    return `<div class="cereal-container">
+                        <a class="border-button" href="/products/${d.id}">
+                            <img src="${d.image}" class="cereal-img"/>
+                        </a>
+                        <h3>${d.name}</h3>
+                        <div>
+                            <p style="display: inline; font-weight: bold">${d.price}</p>
+                            <button class="button roundbutton" onClick="decrement('${d.id}')">-</button>
+                            <p class="cereal-amount" id="${d.id} amount">${cereals[d.id]}</p>
+                            <button class="button roundbutton" onClick="increment('${d.id}')">+</button>
+                            <button class="button" onClick="sendToCart('${d.id}')">Cart</button>
+                        </div>
+                    </div>`
+                });
+                $('.catalog-container').html(newHtml.join(''));
+                $('#search').val('');
+
+            },
+            error: function(xhr, status, error) {
+                console.log(error);
+            }
+        })
+    });
+});
