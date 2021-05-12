@@ -135,7 +135,7 @@ def review(request):
         card_id = request.session['selected_card_id']
         card_num = str(cards[int(card_id) - 1]["cardNumber"])
 
-    return render(request, 'cart/index.html', {
+    return render(request, 'cart/review.html', {
         'profile': profile,
         'address': profile.address,
         'items': OrderItem.objects.filter(order=order),
