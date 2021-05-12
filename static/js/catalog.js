@@ -15,22 +15,25 @@ function updateAmount(cerealID) {
 }
 
 function sendToCart(cerealID) {
-    $.ajax({
-        headers: {'X-CSRFToken': csrftoken},
-        type: 'POST',
-        url: cartIndex,
-        data: {'id': cerealID, 'amount': document.getElementById(cerealID + " amount").textContent},
-        success: function (data) {
-             //this gets called when server returns an OK response
-             alert("it worked!");
-             cereals[cerealID] = 0;
-             updateAmount(cerealID);
-             console.log(data);
-        },
-        error: function (data) {
-             alert("it didnt work\n" + data);
-        }
-    });
+    let amount = parseInt(document.getElementById(cerealID + " amount").textContent);
+    if (amount > 0) {
+        $.ajax({
+            headers: {'X-CSRFToken': csrftoken},
+            type: 'POST',
+            url: cartIndex,
+            data: {'id': cerealID, 'amount': amount},
+            success: function (data) {
+                 //this gets called when server returns an OK response
+                 alert("it worked!");
+                 cereals[cerealID] = 0;
+                 updateAmount(cerealID);
+                 console.log(data);
+            },
+            error: function (data) {
+                 alert("it didnt work\n" + data);
+            }
+        });
+    }
 }
 
 $(document).ready(function() {
