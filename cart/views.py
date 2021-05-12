@@ -81,7 +81,7 @@ def removeFromCart(request):
 
 @login_required
 def pay(request):
-    pay_form = PayForm(request.POST or None, initial=request.session.get('PayFormData'), request=request)
+    pay_form = PayForm(request, request.POST or None, initial=request.session.get('PayFormData'))
     if request.method == 'POST':
         if pay_form.is_valid():
             try:

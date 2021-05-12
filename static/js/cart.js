@@ -1,4 +1,4 @@
-function yesnoCheck() {
+function newCardCheck() {
     let radioButtonList = document.getElementsByName("card_select");
     for (let item of radioButtonList) {
         if (item.value === "new-card" && item.checked) {
