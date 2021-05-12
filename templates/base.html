@@ -23,16 +23,13 @@
                   <li><a href="{% url 'catalog-page' %}"><i class="bi bi-shop"></i> Catalog</a></li>
                   <li><a href="{% url 'cart-index' %}"><i class="bi bi-basket"></i> Cart</a></li>
                   {% if user.is_authenticated %}
-                    <li><a href="{% url 'profile' %}"><i class="bi bi-person-circle"></i> Profile</a></li>
+                    <li><a href="{% url 'profile' %}"><div id = "image-cropper"><img src={{ user.profile.photo }} class="profile-image"></div> Profile</a></li>
                     <li><a href="{% url 'logout' %}"><i class="bi bi-box-arrow-left"></i> Logout</a></li>
                   {% else %}
                     <li><a href="{% url 'login' %}"><i class="bi bi-person-circle"></i> Login</a></li>
                     <li><a href="{% url 'register' %}"><i class="bi bi-person-plus-fill"></i> Register</a></li>
                   {% endif %}
               </ul>
-                {% if user.is_authenticated %}
-                    <img src={{ user.profile.photo }} class="profile-image">
-                {% endif %}
           </div><!-- /.navbar-collapse -->
 
         <!-- Collect the nav links, forms, and other content for toggling -->
