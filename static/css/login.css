@@ -4,9 +4,7 @@
     margin-top: 50px;
     display: inline-block;
 }
-.button-container{
-    display: inline-flex;
-}
+
 .center{
     text-align: center;
 }
@@ -22,10 +20,4 @@ label{
 input{
     width: 60%;
     height: 30px;
-}
-button{
-    width: 200px;
-    height: 100px;
-    margin-right: 40px;
-    margin-left: 40px;
 }
