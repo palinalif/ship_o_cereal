@@ -38,15 +38,22 @@ def construct_card_dict(request):
         cards.append(c)
     return cards
 
+def updateTotalPrice(request, orderItems):
+    total = 0
+    for item in orderItems:
+        total += item.quantity * item.product.price
+    request.session['totalPrice'] = total
 
 @login_required
 def index(request):
     profile = Profile.objects.filter(user=request.user).first()
     order = Order.objects.filter(profile=profile, status='In Progress').first()
+    updateTotalPrice(request, OrderItem.objects.filter(order=order))
     return render(request, 'cart/index.html', {
         'profile': profile,
         'address': profile.address,
-        'items': OrderItem.objects.filter(order=order)
+        'items': OrderItem.objects.filter(order=order),
+        'totalPrice': request.session['totalPrice']
     })
 
 def addToCart(request):
@@ -77,7 +84,8 @@ def removeFromCart(request):
         product = Product.objects.filter(id=request.POST['id']).first()
         item = OrderItem.objects.filter(order=order, product=product).first()
         item.delete()
-        return JsonResponse({'id': request.POST['id']})
+        updateTotalPrice(request, OrderItem.objects.filter(order=order))
+        return JsonResponse({'id': request.POST['id'], 'totalPrice': request.session['totalPrice']})
 
 @login_required
 def pay(request):
@@ -127,11 +135,12 @@ def review(request):
         card_id = request.session['selected_card_id']
         card_num = str(cards[int(card_id) - 1]["cardNumber"])
 
-    return render(request, 'cart/index.html', {
+    return render(request, 'cart/review.html', {
         'profile': profile,
         'address': profile.address,
         'items': OrderItem.objects.filter(order=order),
-        'card_num': card_num
+        'card_num': card_num,
+        'totalPrice': request.session['totalPrice']
     })
 
 @login_required
