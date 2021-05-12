@@ -44,6 +44,7 @@ $(document).ready(function() {
             url: '?searchFilter=' + searchText,
             type: 'GET',
             success: function(resp) {
+                if (!availableTags.includes(searchText)){availableTags.push(searchText)}
                 var newHtml = resp.data.map(d => {
                     return `<div class="cereal-container">
                         <a class="border-button" href="/products/${d.id}">

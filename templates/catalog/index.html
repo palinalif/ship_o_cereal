@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{% static 'css/catalog.css' %}">
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <script src="{% static 'jquery/dist/jquery.js' %}"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="{% static 'js/catalog.js' %}"></script>
     <h1>This is the Catalog</h1>
     <label for="filter">Filter by: </label>
@@ -28,7 +29,17 @@
     <label for="search">Search: </label>
         <input type="search" id="search" placeholder="search" name="search"/>
         <button type="button" id="search-btn" class="btn btn-default">Search</button>
-
+        <script>
+            var availableTags = [];
+          $(function() {
+              {% for query in searchHistory %}
+                availableTags.push("{{query.query}}");
+                {% endfor %}
+            $( "#search" ).autocomplete({
+              source: availableTags
+            });
+          } );
+        </script>
     <div class = "catalog-container">
         {% for cereal in cereals %}
         <div class = "cereal-container">
