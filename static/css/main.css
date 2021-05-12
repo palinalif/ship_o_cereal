@@ -31,6 +31,9 @@
     background-size: 400% 400%;
     animation: gradient 15s ease
 infinite;
+    position: fixed;
+    top: 0;
+    width: 100%;
 }
 
 /*#navBar {
@@ -40,6 +43,7 @@ infinite;
 /*Decides background color for the WHOLE SITE*/
 body {
     background-color: #f8eded;
+    margin-top: 200px;
 }
 
 
@@ -72,6 +76,9 @@ infinite;
 #bs-example-navbar-collapse-1 {
     width:30%;
     float:right;
+}
+
+#bs-example-navbar-collapse-1 ul {
     display:inline-block;
 }
 
@@ -95,4 +102,14 @@ infinite;
     display:flex;
     align-items: center;
     justify-content: center
+}
+
+.ui-helper-hidden-accessible{
+    display: none;
+}
+
+.footer{
+    margin-top: 50px;
+    justify-content: center;
+    background-color: lightcoral;
 }

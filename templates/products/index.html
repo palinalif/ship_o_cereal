@@ -25,7 +25,7 @@
         <button class="bigButton" > Go Back </button>
         <button class="bigButton" > Add to cart </button>
     </div>
-    {% if user.is_authenticated %}
+    {% if user.is_superuser %}
     <a id= "deleteButton" href="{% url 'delete-product' cereal.id %}" class="block btn btn-primary">Delete Product</a>
     <a id= "updateButton" href="{% url 'update-product' cereal.id %}" class="block btn btn-primary">Update Product</a>
     <a id= "createButton" href="{% url 'create-product' %}" class="block btn btn-primary">Create Product</a>
