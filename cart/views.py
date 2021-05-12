@@ -117,7 +117,8 @@ def pay(request):
 
 @login_required
 def review(request):
-    user_info = construct_user_dict(request)
+    profile = Profile.objects.filter(user=request.user).first()
+    order = Order.objects.filter(profile=profile, status='In Progress').first()
     cards = construct_card_dict(request)
     try:
         if request.session['selected_card']:
@@ -125,7 +126,13 @@ def review(request):
     except KeyError:
         card_id = request.session['selected_card_id']
         card_num = str(cards[int(card_id) - 1]["cardNumber"])
-    return render(request, 'cart/review.html', {"user_info": user_info, "card_num": card_num})
+
+    return render(request, 'cart/index.html', {
+        'profile': profile,
+        'address': profile.address,
+        'items': OrderItem.objects.filter(order=order),
+        'card_num': card_num
+    })
 
 @login_required
 def receipt(request):

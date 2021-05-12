@@ -7,37 +7,27 @@
     <link rel="stylesheet" href="{% static 'css/cart.css' %}">
     <h1>Review</h1>
     <div id = "cereal-container">
-        <div class = "cereal-cart-info-box">
-            <img src="https://images-na.ssl-images-amazon.com/images/I/81VQIHQ0-CL._SL1500_.jpg"/>
-            <h3>Cheerios</h3>
+        {% for item in items %}
+        <div class = "cereal-cart-info-box" id = "{{ item.product.id }}container">
+            <button class = "del-button" value="{{ item.product.id }}">X</button>
+            <img src="{{ item.product.productimage_set.first.image }}"/>
+            <h3>{{ item.product.name }}</h3>
             <div class = "cereal-info">
-                <p>Amount: 2</p>
-                <p>Price: 1200</p>
+                <p>Amount: {{ item.quantity }}</p>
+                <p>Price: {{ item.quantity|mul:item.product.price }} kr.</p>
+                <script>
+                    prices[{{ item.product.id }}] = {{ item.quantity|mul:item.product.price }};
+                </script>
             </div>
         </div>
-        <div class = "cereal-cart-info-box">
-            <img src="https://images-na.ssl-images-amazon.com/images/I/81VQIHQ0-CL._SL1500_.jpg"/>
-            <h3>Cheerios</h3>
-            <div class = "cereal-info">
-                <p>Amount: 2</p>
-                <p>Price: 1200</p>
-            </div>
-        </div>
-        <div class = "cereal-cart-info-box">
-            <img src="https://images-na.ssl-images-amazon.com/images/I/81VQIHQ0-CL._SL1500_.jpg"/>
-            <h3>Cheerios</h3>
-            <div class = "cereal-info">
-                <p>Amount: 2</p>
-                <p>Price: 1200</p>
-            </div>
-        </div>
+        {% endfor %}
     </div>
     <div id = "right-side-container">
         <h2 id = "total-header">Total: 100000000 kr.</h2>
         <div id = "user-info-container">
-            <p>Name: {{ user_info.name }}</p>
-            <p>Phone number: {{ user_info.phone }}</p>
-            <p>Address: {{ user_info.streetName }}  {{ user_info.houseNumber }} {{ user_info.postalCode }} {{ user_info.city }} {{ user_info.country }}</p>
+            <p>Name: {{ profile.name }}</p>
+            <p>Phone number: {{ profile.phone }}</p>
+            <p>Address: {{ address.streetName }}  {{ address.houseNumber }} {{ address.postalCode }} {{ address.city }} {{ address.country }}</p>
             <p>Card: Ending with {{ card_num | slice:"-4:" }}</p>
         </div>
         <div id = "button-container">
