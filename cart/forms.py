@@ -1,47 +1,37 @@
 from django import forms
 from django.utils.safestring import mark_safe
+from user.models import Profile, Address, PaymentInfo
 
-#TODO: Replace with database connection
-user_info = {
-    'id': 1,
-    'name': 'Test user',
-    'email': 'user@testuser.com',
-    'phone': '123-4567',
-    'password': 'dfjajfauwr89428934d',
-    'streetName': 'Eitthvaðstræti',
-    'houseNumber': '69',
-    'city': 'Reykjavík',
-    'country': 'Iceland',
-    'postalCode': 109
-}
-
-#and let's say that these are their cards
-cards = [
-    {
-        'userId':1,
-        'cardHolderName':'Test user',
-        'cardNumber':377337278995056,
-        'expDate':"0122",
-        'cvc':123
-    },
-    {
-        'userId':1,
-        'cardHolderName':'Test user',
-        'cardNumber':342935602344123,
-        'expDate':"1125",
-        'cvc':456
-    }
-]
+def construct_card_dict(request):
+    profile = Profile.objects.filter(user=request.user).first()
+    cardQueries = PaymentInfo.objects.filter(profile=profile)
+    cards = []
+    for card in cardQueries:
+        c = {
+            'cardHolderName':card.cardHolder,
+            'cardNumber':card.cardNumber,
+            'expDate':card.expDate,
+            'cvc':card.cvc
+        }
+        cards.append(c)
+    return cards
 
 class PayForm(forms.Form):
+    # https://stackoverflow.com/questions/8841502/how-to-use-the-request-in-a-modelform-in-django
+    # TODO: Get this working, pls help
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop("request")
+        super(PayForm, self).__init__(*args, **kwargs)
+        self.cards = construct_card_dict(self.request)
+    """
     CHOICES = []
     counter = 1
-    for card in cards:
-        print(card)
-        CHOICES.append((f'card{counter}', mark_safe(f'<div class = "card-set"><p>Card ending with:</p><p>******** {str(card["cardNumber"])[-4:]}<p></div><div class = "card-set"><p>Expiry date:</p><p>{card["expDate"][:2]}/{card["expDate"][-2:]}</p></div>')))
+    for card in self.cards:
+        CHOICES.append((f'card{counter}', mark_safe(
+            f'<div class = "card-set"><p>Card ending with:</p><p>******** {str(card["cardNumber"])[-4:]}<p></div><div class = "card-set"><p>Expiry date:</p><p>{card["expDate"][:2]}/{card["expDate"][-2:]}</p></div>')))
         counter += 1
     CHOICES.append(('new-card', 'New Card...'))
-    card_select = forms.CharField(label='Choose a card...', widget=forms.RadioSelect(choices=CHOICES))
+    card_select = forms.CharField(label='Choose a card...', widget=forms.RadioSelect(choices=CHOICES))"""
 
 class NewCardForm(forms.Form):
     card_number = forms.CharField(label='Card Number:', max_length=100)
@@ -67,4 +57,4 @@ class NewCardForm(forms.Form):
     year = forms.ChoiceField(choices=YEAR_CHOICES)
     cvv = forms.CharField(label='CVV:', max_length=3)
     holder_name = forms.CharField(label='Card Holder Name:', max_length=100)
-    save_card = forms.BooleanField()
+    save_card = forms.BooleanField(required=False)
