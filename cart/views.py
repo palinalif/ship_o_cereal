@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse, HttpResponseRedirect
 from django.urls import reverse
+from json import dumps
 import json
 from .forms import PayForm
 from .forms import NewCardForm
@@ -9,6 +10,7 @@ from user.models import Profile, Address, PaymentInfo
 
 from user.models import Profile, Order, Address
 from cart.models import OrderItem, Product
+
 # Create your views here.
 
 def construct_user_dict(request):
@@ -37,6 +39,20 @@ def construct_card_dict(request):
         }
         cards.append(c)
     return cards
+
+def order_item_queries_to_list(queries):
+    items = []
+    for item in queries:
+        i = {
+            "product": {
+                "name": item.product.name,
+                "price": item.product.price
+            },
+            "quantity": item.quantity,
+            "order_id": item.order.id
+        }
+        items.append(i)
+    return items
 
 def updateTotalPrice(request, orderItems):
     total = 0
@@ -145,7 +161,11 @@ def review(request):
 
 @login_required
 def receipt(request):
+    profile = Profile.objects.filter(user=request.user).first()
+    order = Order.objects.filter(profile=profile, status='In Progress').first()
     user_info = construct_user_dict(request)
-    return render(request, 'cart/receipt.html', user_info)
+    order_list = order_item_queries_to_list(OrderItem.objects.filter(order=order))
+    print(order_list)
+    return render(request, 'cart/receipt.html', {"user_info": user_info, "items": order_list, "basic_user_info": {'name': user_info['name']}, "totalPrice": request.session['totalPrice']})
 
 
