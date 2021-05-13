@@ -8,4 +8,13 @@
         <input type="submit" class="btn btn-primary" value="Update"/>
     </form>
     <a id= "seeHistory" href="{% url 'seeSearchHistory' %}" >See Search History</a>
+    {% if orders is not None %}
+        <h1>Previous orders:</h1>
+    {% endif %}
+    {% for order in orders %}
+        <div>
+            <h2>{{ order.dateCreated }}</h2>
+            <a href="order/{{ order.id }}">View contents</a>
+        </div>
+    {% endfor %}
 {% endblock %}
