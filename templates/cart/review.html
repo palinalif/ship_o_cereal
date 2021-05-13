@@ -10,7 +10,6 @@
     <div id = "cereal-container">
         {% for item in items %}
         <div class = "cereal-cart-info-box" id = "{{ item.product.id }}container">
-            <button class = "del-button" value="{{ item.product.id }}">X</button>
             <img src="{{ item.product.productimage_set.first.image }}"/>
             <h3>{{ item.product.name }}</h3>
             <div class = "cereal-info">
@@ -29,7 +28,7 @@
             <p>Name: {{ profile.name }}</p>
             <p>Phone number: {{ profile.phone }}</p>
             <p>Address: {{ address.streetName }}  {{ address.houseNumber }} {{ address.postalCode }} {{ address.city }} {{ address.country }}</p>
-            <p>Card: Ending with {{ card_num | slice:"-4:" }}</p>
+            <p>Card: Ending with {{ cardNumber | slice:"-4:" }}</p>
         </div>
         <div id = "button-container">
             <form action="{% url 'receipt' %}" class = "button-form">
