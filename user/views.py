@@ -16,27 +16,6 @@ def register(request):
         'form': UserCreationForm()
     })
 
-def index(request):
-    return render(request, 'login/login.html')
-
-def loginUser(request):
-    #https://www.smashingmagazine.com/2020/02/django-highlights-user-models-authentication/
-    if request.user.is_authenticated:
-        return render(request, 'catalog/login.html')
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect('/')
-        else:
-            form = AuthenticationForm(request.POST)
-            return render(request, 'login/login.html', {'form': form})
-    else:
-        form = AuthenticationForm()
-        return render(request, 'login/login.html', {'form': form})
-
 def profile(request):
     profile = Profile.objects.filter(user=request.user).first()
     if request.method == 'POST':

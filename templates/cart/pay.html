@@ -4,16 +4,31 @@
     <title>Catalog</title>
 </head>
 {% block content %}
+    {% csrf_token %}
 
+    <script src="{% static 'jquery/dist/jquery.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
+    <script>
+    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    </script>
     <link rel="stylesheet" href="{% static 'css/cart.css' %}">
-    <form id = "card-info" method="post">
+    {% for card in cards %}
         {% csrf_token %}
-        {{ buttonForm }}
-        <input type="submit" value="Submit" id = "buttonFormSubmit">
-    </form>
+    {#        <input type="radio" onclick="newCardCheck({{ card.id }})">#}
+        <div class = "card-set">
+            <p>Card ending with:</p>
+            <p>************{{ card.cardNumber|slice:"-4:" }}</p>
+        </div>
+        <div class = "card-set">
+            <p>Expiry date:</p>
+            <p>{{ card.expDate|slice:":2" }}/{{ card.expDate|slice:"-2:" }}</p>
+        </div>
+        <button onclick='useCard({{ card.id }})'>Select</button>
+    {% endfor %}
+    <h3>New Card:</h3>
     <div id = "register-card">
-        <h3>New Card:</h3>
         <form method="post">
+
             {% csrf_token %}
             {{ cardForm }}
             <input type="submit" value="Submit">
@@ -24,5 +39,4 @@
         <button type = "submit">Go Back</button>
     </form>
 
-    <script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
 {% endblock %}
