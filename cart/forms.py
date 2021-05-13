@@ -1,8 +1,7 @@
 from django import forms
-from django.forms import widgets, ModelForm
 from django.utils.safestring import mark_safe
 from user.models import Profile, Address, PaymentInfo
-
+from django.core.validators import int_list_validator
 
 def construct_card_dict(request):
     profile = Profile.objects.filter(user=request.user).first()
@@ -20,8 +19,6 @@ def construct_card_dict(request):
 
 
 class PayForm(forms.Form):
-    # https://stackoverflow.com/questions/8841502/how-to-use-the-request-in-a-modelform-in-django
-    # TODO: Get this working, pls help
     def __init__(self, request, *args, **kwargs):
         super(PayForm, self).__init__(*args, **kwargs)
         self.cards = construct_card_dict(request)
@@ -35,37 +32,28 @@ class PayForm(forms.Form):
         self.fields['card_select'] = forms.CharField(label='Choose a card...', widget=forms.RadioSelect(choices=CHOICES))
 
 
-class NewCardForm(ModelForm):
-    class Meta:
-        model = PaymentInfo
-        exclude = ['id', 'profile']
-        widgets = {
-            'cardHolder': widgets.TextInput(attrs={'class': 'form-control'}),
-            'cardNumber': widgets.TextInput(attrs={'class': 'form-control'}),
-            'expDate': widgets.TextInput(attrs={'class': 'form-control'}),
-            'cvc': widgets.TextInput(attrs={'class': 'form-control'})
-        }
-    # card_number = forms.CharField(label='Card Number:', max_length=100)
-    # MONTH_CHOICES = [('01', 'January'),
-    #                  ('02', 'February'),
-    #                  ('03', 'March'),
-    #                  ('04', 'April'),
-    #                  ('05', 'May'),
-    #                  ('06', 'June'),
-    #                  ('07', 'July'),
-    #                  ('08', 'August'),
-    #                  ('09', 'September'),
-    #                  ('10', 'October'),
-    #                  ('11', 'November'),
-    #                  ('12', 'December')]
-    # YEAR_CHOICES = [('21', '21'),
-    #                 ('22', '22'),
-    #                 ('23', '23'),
-    #                 ('24', '24'),
-    #                 ('25', '25')
-    #                 ]
-    # month = forms.ChoiceField(choices=MONTH_CHOICES)
-    # year = forms.ChoiceField(choices=YEAR_CHOICES)
-    # cvv = forms.CharField(label='CVV:', max_length=3)
-    # holder_name = forms.CharField(label='Card Holder Name:', max_length=100)
-    # save_card = forms.BooleanField(required=False)
+class NewCardForm(forms.Form):
+    card_number = forms.CharField(label='Card Number:', max_length=16,min_length=16, validators=[int_list_validator(sep='')])
+    MONTH_CHOICES = [('01', 'January'),
+                     ('02', 'February'),
+                     ('03', 'March'),
+                     ('04', 'April'),
+                     ('05', 'May'),
+                     ('06', 'June'),
+                     ('07', 'July'),
+                     ('08', 'August'),
+                     ('09', 'September'),
+                     ('10', 'October'),
+                     ('11', 'November'),
+                     ('12', 'December')]
+    YEAR_CHOICES = [('21', '21'),
+                    ('22', '22'),
+                    ('23', '23'),
+                    ('24', '24'),
+                    ('25', '25')
+                    ]
+    month = forms.ChoiceField(choices=MONTH_CHOICES)
+    year = forms.ChoiceField(choices=YEAR_CHOICES)
+    cvv = forms.CharField(label='CVV:', max_length=4, min_length=3, validators=[int_list_validator(sep='')])
+    holder_name = forms.CharField(label='Card Holder Name:', max_length=100)
+    save_card = forms.BooleanField(required=False)

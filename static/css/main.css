@@ -31,11 +31,25 @@
     background-size: 400% 400%;
     animation: gradient 15s ease
 infinite;
+    position: fixed;
+    top: 0;
+    width: 100%;
 }
+
+/*#navBar {
+    font-size: 20px;
+}*/
 
 /*Decides background color for the WHOLE SITE*/
 body {
     background-color: #f8eded;
+    margin-top: 200px;
+}
+
+html{
+   margin: 0px;
+   height: 100%;
+   width: 100%;
 }
 
 
@@ -50,8 +64,8 @@ infinite;
 
 #image-cropper {
     display: inline-block;
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     position: relative;
     overflow: hidden;
     border-radius: 50%;
@@ -63,4 +77,48 @@ infinite;
   margin-left: -25%;
   height: 100%;
   width: auto;
+}
+
+#bs-example-navbar-collapse-1 {
+    width:30%;
+    float:right;
+}
+
+#bs-example-navbar-collapse-1 ul {
+    display:inline-block;
+}
+
+#bs-example-navbar-collapse-1 ul {
+    display:flex;
+    flex-direction: row;
+    height:100%;
+    justify-content: center;
+    align-items: center;
+}
+
+#profile-text {
+    padding-left:5px;
+}
+
+.navbar-header {
+    display:inline-block;
+}
+
+#profile-container {
+    display:flex;
+    align-items: center;
+    justify-content: center
+}
+
+.ui-helper-hidden-accessible{
+    display: none;
+}
+
+.footer{
+    position: relative;
+    bottom: 0;
+    margin-top: 50px;
+    width: 100%;
+    justify-content: center;
+    background-color: lightcoral;
 }
