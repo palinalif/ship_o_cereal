@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse, HttpResponseRedirect
 from django.urls import reverse
+from json import dumps
 import json
 from .forms import PayForm
 from .forms import NewCardForm
@@ -9,6 +10,7 @@ from user.models import Profile, Address, PaymentInfo
 
 from user.models import Profile, Order, Address
 from cart.models import OrderItem, Product
+
 # Create your views here.
 
 def construct_user_dict(request):
