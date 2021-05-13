@@ -12,17 +12,17 @@ from cart.models import OrderItem, Product
 
 
 
-def updateTotalPrice(request, orderItems):
+def getTotalPrice(orderItems):
     total = 0
     for item in orderItems:
         total += item.quantity * item.product.price
-    request.session['totalPrice'] = total
+    return total
 
 @login_required
 def index(request):
     profile = Profile.objects.filter(user=request.user).first()
     order = Order.objects.filter(profile=profile, status='In Progress').first()
-    updateTotalPrice(request, OrderItem.objects.filter(order=order))
+    request.session['totalPrice'] = getTotalPrice(OrderItem.objects.filter(order=order))
     return render(request, 'cart/index.html', {
         'profile': profile,
         'address': profile.address,
@@ -60,7 +60,7 @@ def removeFromCart(request):
         product = Product.objects.filter(id=request.POST['id']).first()
         item = OrderItem.objects.filter(order=order, product=product).first()
         item.delete()
-        updateTotalPrice(request, OrderItem.objects.filter(order=order))
+        request.session['totalPrice'] = getTotalPrice(OrderItem.objects.filter(order=order))
         return JsonResponse({'id': request.POST['id'], 'totalPrice': request.session['totalPrice']})
 
 @login_required
@@ -104,5 +104,8 @@ def review(request):
 @login_required
 def receipt(request):
     if 'currentCard' in request.session.keys():
+        order = Order.objects.filter(profile=request.user.profile, status='In Progress').first()
+        order.status = 'Done'
+        order.save()
         return render(request, 'cart/receipt.html', {'address': request.user.profile.address})
     # TODO: return 404
