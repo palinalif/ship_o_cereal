@@ -24,13 +24,13 @@ function sendToCart(cerealID) {
             data: {'id': cerealID, 'amount': amount},
             success: function (data) {
                  //this gets called when server returns an OK response
-                 alert("it worked!");
+                 $(".alert-success").show();
                  cereals[cerealID] = 0;
                  updateAmount(cerealID);
-                 console.log(data);
+                 $(".alert-success").delay(1000).fadeOut(500);
             },
             error: function (data) {
-                 alert("it didnt work\n" + data);
+                window.location.href = 'user/login';
             }
         });
     }
