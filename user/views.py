@@ -1,7 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 from user.forms.accountForm import AccountRegisterForm
-from user.models import Profile, Address
+from user.models import Profile, Address, SearchHistory
 from user.forms.profile_form import ProfileForm
 
 
@@ -23,6 +23,16 @@ def aboutUs(request):
             form.save()
             return redirect('login')
     return render(request, 'user/aboutUs.html')
+
+def seeSearchHistory(request):
+    if request.method == 'POST':
+        form = UserCreationForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')
+    return render(request, 'user/seeSearchHistory.html', {
+        'searchHistory': SearchHistory.objects.filter(profile=request.user.profile)
+    })
 
 def index(request):
     return render(request, 'login/login.html')
