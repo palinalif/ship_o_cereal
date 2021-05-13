@@ -8,7 +8,7 @@
     <div id = "receipt-container">
         <h1>Receipt</h1>
         <h3>Thank you for your purchase.</h3>
-        <h3>Your purchase will be delivered to {{ streetName }}  {{ houseNumber }} on May 25th.</h3>
+        <h3>Your purchase will be delivered to {{ address.streetName }}  {{ address.houseNumber }} on May 25th.</h3>
         <button id = "receipt-button">Print Receipt</button>
         <br>
         <form action = "{% url 'catalog-page' %}" class = "button-form">

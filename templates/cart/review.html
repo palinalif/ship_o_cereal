@@ -29,7 +29,7 @@
             <p>Name: {{ profile.name }}</p>
             <p>Phone number: {{ profile.phone }}</p>
             <p>Address: {{ address.streetName }}  {{ address.houseNumber }} {{ address.postalCode }} {{ address.city }} {{ address.country }}</p>
-            <p>Card: Ending with {{ card_num | slice:"-4:" }}</p>
+            <p>Card: Ending with {{ cardNumber | slice:"-4:" }}</p>
         </div>
         <div id = "button-container">
             <form action="{% url 'receipt' %}" class = "button-form">

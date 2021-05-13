@@ -80,29 +80,30 @@ def pay(request):
             # Saves the card number in session to be used on the next page
             request.session['selectedCard'] = newCard
             print("new")
+        return HttpResponseRedirect('cart/review.html')
+    print(cards)
+    print(newCardForm)
     return render(request, 'cart/pay.html', {"cards": cards, "cardForm": newCardForm})
 
 
 @login_required
 def review(request):
-    print("hello")
     profile = Profile.objects.filter(user=request.user).first()
     order = Order.objects.filter(profile=profile, status='In Progress').first()
     cards = PaymentInfo.objects.filter(profile=profile)
     request.session['selectedCard'] = 12
-    cardNum = cards.filter(pk=request.session['selectedCard']).first().cardNumber
+    cardNumber = cards.filter(pk=request.session['selectedCard']).first().cardNumber
 
     return render(request, 'cart/review.html', {
         'profile': profile,
         'address': profile.address,
         'items': OrderItem.objects.filter(order=order),
-        'cardNum': cardNum,
+        'cardNumber': cardNumber,
         'totalPrice': request.session['totalPrice']
     })
 
 @login_required
 def receipt(request):
-    user_info = construct_user_dict(request)
-    return render(request, 'cart/receipt.html', user_info)
+    return render(request, 'cart/receipt.html', {'address': request.user.profile.address})
 
 

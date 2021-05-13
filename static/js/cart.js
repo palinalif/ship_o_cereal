@@ -18,12 +18,13 @@
 function useCard(cardID) {
     console.log(cardID)
     $.ajax({
-        headers: {'X-CSRFToken': csrftoken},
+        headers: {'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value},
         url: ".",
         type: 'POST',
         data: {'cardID': cardID},
         success: function(resp) {
             console.log("yeet");
+            window.location.href = reviewSite;
         },
         error: function(xhr, status, error) {
             console.log(error);

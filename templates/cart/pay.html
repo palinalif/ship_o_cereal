@@ -5,12 +5,8 @@
 </head>
 {% block content %}
     {% csrf_token %}
-
     <script src="{% static 'jquery/dist/jquery.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
-    <script>
-    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
-    </script>
     <link rel="stylesheet" href="{% static 'css/cart.css' %}">
     {% for card in cards %}
         {% csrf_token %}
@@ -38,5 +34,10 @@
     <form action = "{% url 'cart-index' %}" class = "button-form">
         <button type = "submit">Go Back</button>
     </form>
+
+    <script>
+    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    const reviewSite = {% url 'review' %};
+    </script>
 
 {% endblock %}
