@@ -145,7 +145,11 @@ def review(request):
 
 @login_required
 def receipt(request):
+    profile = Profile.objects.filter(user=request.user).first()
     user_info = construct_user_dict(request)
+    order = Order.objects.filter(profile=profile, status='In Progress').first()
+    order.status = 'Done'
+    order.save()
     return render(request, 'cart/receipt.html', user_info)
 
 
