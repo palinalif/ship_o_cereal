@@ -1,23 +1,17 @@
-function newCardCheck() {
-    let radioButtonList = document.getElementsByName("card_select");
-    for (let item of radioButtonList) {
-        if (item.value === "new-card" && item.checked) {
-            document.getElementById('register-card').style.display = 'block';
-            document.getElementById('buttonFormSubmit').style.display = 'none';
-        } else {
-            document.getElementById('register-card').style.display = 'none'
-            document.getElementById('buttonFormSubmit').style.display = 'block';
+function useCard(cardID) {
+    $.ajax({
+        headers: {'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value},
+        url: ".",
+        type: 'POST',
+        data: {'cardID': cardID},
+        success: function(resp) {
+            window.location.href = '../review';
+        },
+        error: function(xhr, status, error) {
+            console.log(error);
         }
-    }
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-    let radioButtonList = document.getElementsByName("card_select");
-    for (let item of radioButtonList) {
-        item.setAttribute("onclick","newCardCheck()");
-}
-    newCardCheck(); //initial check
-});
+    });
+};
 
 $(document).ready(function() {
     $('.del-button').on('click', function(e) {

@@ -24,9 +24,9 @@ class Profile(models.Model):
 class PaymentInfo(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     cardHolder = models.CharField(max_length=255)
-    cardNumber = models.IntegerField()
-    expDate = models.IntegerField()
-    cvc = models.IntegerField()
+    cardNumber = models.CharField(max_length=16)
+    expDate = models.CharField(max_length=4)
+    cvc = models.CharField(max_length=4)
 
 class SearchHistory(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)

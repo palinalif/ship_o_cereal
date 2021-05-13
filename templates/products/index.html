@@ -6,24 +6,15 @@
 {% block content %}
     <link rel="stylesheet" href="{% static 'css/description.css' %}">
     <script src="{% static 'jquery/dist/jquery.js' %}"></script>
-    <h1>This is the Description</h1>
+    <h1>Product Info</h1>
     <img class= "img" src="{{ cereal.productimage_set.first.image }}" alt="Cereal img">
     <div class = "information">
         <h2 id= "cerealName" >Name: {{ cereal.name }}</h2>
         <h3 id= "cerealPrice" >Price: {{ cereal.price }} kr</h3>
-        <h4 class= "priceKg" > 1400 kr/kg </h4>
-        <p id= "inStock"></p>
     </div>
-    <div class= "info" id="Description" >Ingredients: {{ cereal.description }}</div>
-    <div class= "info" id="Nurtitional info" >Nutritional information: {{ cereal.nutriInfo }}</div>
-    <div class ="smallButtons">
-        <button onclick='decrement()' class="smallButton" > - </button>
-        <span id="amount"> 0 </span>
-        <button onclick='increment()' class="smallButton" > + </button>
-    </div>
+    <div class= "info" id="Description" >Description: {{ cereal.description }}</div>
     <div class ="bigButtons">
-        <button class="bigButton" > Go Back </button>
-        <button class="bigButton" > Add to cart </button>
+        <button class="bigButton" onclick="window.location.href = '{% url 'catalog-page' %}'"> Go Back </button>
     </div>
     {% if user.is_superuser %}
     <a id= "deleteButton" href="{% url 'delete-product' cereal.id %}" class="block btn btn-primary">Delete Product</a>
