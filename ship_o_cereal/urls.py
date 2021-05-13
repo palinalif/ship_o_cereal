@@ -20,9 +20,8 @@ urlpatterns = [
     path('', include('catalog.urls')),
     path('admin/', admin.site.urls),
     path('cart/', include('cart.urls')),
-    #path('login/', include('login.urls')),
     path('products/', include('products.urls')),
-    #path('register/', include('register.urls')),
-    #path('edit_profile/', include('edit_profile.urls')),
     path('user/', include('user.urls'))
 ]
+
+handler404 = 'error.views.error_404_view'
