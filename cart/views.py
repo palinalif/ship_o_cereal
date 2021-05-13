@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse, HttpResponseRedirect
+from django.http import JsonResponse, HttpResponseRedirect, HttpResponseForbidden
 from django.urls import reverse
 from cart.forms.NewCardForm import NewCardForm
 from user.models import PaymentInfo
@@ -50,6 +50,8 @@ def addToCart(request):
         order.save()
         item.save()
         return JsonResponse({'amount': item.quantity, 'id': request.POST['id']})
+    return HttpResponseForbidden()
+
 
 def removeFromCart(request):
     if request.user.is_authenticated:
@@ -63,40 +65,44 @@ def removeFromCart(request):
 
 @login_required
 def pay(request):
-    cards = PaymentInfo.objects.filter(profile=request.user.profile)
     if request.method == 'POST':
-        if 'cardID' in request.POST:
-            request.session['cardID'] = int(request.POST['cardID'])
         form = NewCardForm(data = request.POST)
         if form.is_valid():
             newCard = form.save(commit=False)
-            newCard.profile = Profile.objects.filter(user=request.user).first()
-            newCard.save()
-            request.session['cardID'] = newCard.id
+            request.session['currentCard'] = {
+                'cardNumber': newCard.cardNumber,
+                'cardHolder': newCard.cardHolder,
+                'expDate': newCard.expDate,
+                'cvc': newCard.cvc,
+            }
             return redirect('review')
     else:
-        form = NewCardForm()
+        if 'currentCard' in request.session.keys():
+            form = NewCardForm(initial=request.session['currentCard'])
+        else:
+            form = NewCardForm()
 
     return render(request, 'cart/pay.html', {
         'cardForm': form,
-        'cards': cards,
     })
 
 @login_required
 def review(request):
-    profile = Profile.objects.filter(user=request.user).first()
-    order = Order.objects.filter(profile=profile, status='In Progress').first()
-    cards = PaymentInfo.objects.filter(profile=profile)
-    cardNumber = cards.filter(pk=request.session['cardID']).first().cardNumber
+    if 'currentCard' in request.session.keys():
+        profile = Profile.objects.filter(user=request.user).first()
+        order = Order.objects.filter(profile=profile, status='In Progress').first()
 
-    return render(request, 'cart/review.html', {
-        'profile': profile,
-        'address': profile.address,
-        'items': OrderItem.objects.filter(order=order),
-        'cardNumber': cardNumber,
-        'totalPrice': request.session['totalPrice']
-    })
+        return render(request, 'cart/review.html', {
+            'profile': profile,
+            'address': profile.address,
+            'items': OrderItem.objects.filter(order=order),
+            'cardNumber': request.session['currentCard']['cardNumber'],
+            'totalPrice': request.session['totalPrice']
+        })
+    # TODO: return 404
 
 @login_required
 def receipt(request):
-    return render(request, 'cart/receipt.html', {'address': request.user.profile.address})
+    if 'currentCard' in request.session.keys():
+        return render(request, 'cart/receipt.html', {'address': request.user.profile.address})
+    # TODO: return 404
