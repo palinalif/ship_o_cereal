@@ -16,6 +16,14 @@ def register(request):
         'form': UserCreationForm()
     })
 
+def aboutUs(request):
+    if request.method == 'POST':
+        form = UserCreationForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')
+    return render(request, 'user/aboutUs.html')
+
 def index(request):
     return render(request, 'login/login.html')
 
