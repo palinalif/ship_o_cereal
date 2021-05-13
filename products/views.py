@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from products.models import *
-from products.forms.createProduct import ProductCreateForm, ProductUpdateForm
+from products.forms.createProduct import ProductForm
 
 # Create your views here.
 
@@ -16,14 +16,14 @@ def product(request, id):
 def createProduct(request):
     if request.user.is_superuser:
         if request.method == 'POST':
-            form = ProductCreateForm(data = request.POST)
+            form = ProductForm(data = request.POST)
             if form.is_valid():
                 cereal = form.save()
                 cerealImage = ProductImage(image = request.POST['image'], product = cereal)
                 cerealImage.save()
                 return redirect('catalog-page')
         else:
-            form = ProductCreateForm()
+            form = ProductForm()
         return render(request, 'products/create.html', {
             'form': form
         })
@@ -38,12 +38,15 @@ def updateProduct(request, id):
     if request.user.is_superuser:
         instance = get_object_or_404(Product, pk = id)
         if request.method == 'POST':
-            form = ProductUpdateForm(data=request.POST, instance=instance)
+            form = ProductForm(data=request.POST, instance=instance)
             if form.is_valid():
+                form.image = request.POST['image']
                 form.save()
                 return redirect('product-index', id=id)
         else:
-            form = ProductUpdateForm(instance=instance)
+            form = ProductForm(instance=instance, initial={
+                'image': ProductImage.objects.filter(product=instance).first().image
+            })
         return render(request, 'products/update.html', {
             'form': form,
             'id': id

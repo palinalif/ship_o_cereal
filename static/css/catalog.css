@@ -19,6 +19,14 @@
 
 }
 
+.alert-success {
+    display: none;
+    position: fixed;
+    width: 20%;
+    right: 10px;
+    top: 100px;
+}
+
 .border-button:hover {
     border-width: 5px;
 }
