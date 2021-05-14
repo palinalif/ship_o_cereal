@@ -70,7 +70,7 @@ def profile(request):
             'streetName': request.user.profile.address.streetName,
             'postNumber': request.user.profile.address.postNumber
         }),
-        'orders': Order.objects.filter(profile=profile, status='Done')
+        'orders': Order.objects.filter(profile=profile, status='Done').order_by('-dateCreated')
     })
 
 @login_required
