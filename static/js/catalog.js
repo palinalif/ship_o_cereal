@@ -56,7 +56,7 @@ $(document).ready(function() {
                             <button class="button roundbutton" onClick="decrement('${d.id}')">-</button>
                             <p class="cereal-amount" id="${d.id} amount">${cereals[d.id]}</p>
                             <button class="button roundbutton" onClick="increment('${d.id}')">+</button>
-                            <button class="button" onClick="sendToCart('${d.id}')">Cart</button>
+                            <button class="button" onClick="sendToCart('${d.id}')"><i class="bi bi-basket"></i></button>
                         </div>
                     </div>`
                 });
@@ -90,7 +90,7 @@ $(document).ready(function() {
                             <button class="button roundbutton" onClick="decrement('${d.id}')">-</button>
                             <p class="cereal-amount" id="${d.id} amount">${cereals[d.id]}</p>
                             <button class="button roundbutton" onClick="increment('${d.id}')">+</button>
-                            <button class="button" onClick="sendToCart('${d.id}')">Cart</button>
+                            <button class="button" onClick="sendToCart('${d.id}')"><i class="bi bi-basket"></i></button>
                         </div>
                     </div>`
                 });
@@ -125,7 +125,7 @@ $(document).ready(function() {
                             <button class="button roundbutton" onClick="decrement('${d.id}')">-</button>
                             <p class="cereal-amount" id="${d.id} amount">${cereals[d.id]}</p>
                             <button class="button roundbutton" onClick="increment('${d.id}')">+</button>
-                            <button class="button" onClick="sendToCart('${d.id}')">Cart</button>
+                            <button class="button" onClick="sendToCart('${d.id}')"><i class="bi bi-basket"></i></button>
                         </div>
                     </div>`
                 });

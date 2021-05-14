@@ -11,9 +11,9 @@ def getCereals():
 
 
 def product(request, id):
-    # TODO: make id check and if invalid goto 404 page
+    cereal = get_object_or_404(Product, pk=id)
     return render(request, 'products/index.html', {
-        'cereal': get_object_or_404(Product, pk=id)
+        'cereal': cereal
     })
 
 
