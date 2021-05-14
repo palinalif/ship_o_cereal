@@ -17,7 +17,7 @@ def index(request):
             'price': c.price,
             'image': c.productimage_set.first().image
         } for c in getCereals().filter(name__icontains = searchFilter)]
-        if request.user.is_authenticated and searchFilter is not "" and searchHistory.filter(query=searchFilter).first() is None:
+        if request.user.is_authenticated and searchFilter != "" and searchHistory.filter(query=searchFilter).first() is None:
             new_query = SearchHistory()
             new_query.profile = profile
             new_query.query = searchFilter
@@ -58,6 +58,9 @@ def index(request):
             } for c in getCereals().filter(tag_id=2)]
 
         return JsonResponse({'data': cereals})
+
+
+    context = {'cereals': getCereals()}
     if request.user.is_authenticated:
-        return render(request, 'catalog/index.html', context=({'cereals': getCereals(), 'searchHistory': searchHistory}))
-    return render(request, 'catalog/index.html', context=({'cereals': getCereals()}))
+        context['searchHistory'] = searchHistory
+    return render(request, 'catalog/index.html', context=context)

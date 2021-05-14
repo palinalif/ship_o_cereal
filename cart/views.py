@@ -4,6 +4,7 @@ from django.http import JsonResponse, HttpResponseRedirect, HttpResponseForbidde
 from django.urls import reverse
 from cart.forms.NewCardForm import NewCardForm
 from user.models import PaymentInfo
+from error.views import *
 
 from user.models import Profile, Order
 from cart.models import OrderItem, Product
@@ -124,7 +125,7 @@ def review(request):
             'cardNumber': request.session['currentCard']['cardNumber'],
             'totalPrice': request.session['totalPrice']
         })
-    # TODO: return 404
+    return error_400_view(request, None)
 
 @login_required
 def receipt(request):
@@ -135,4 +136,4 @@ def receipt(request):
         order.save()
         order_list = order_item_queries_to_list(OrderItem.objects.filter(order=order))
         return render(request, 'cart/receipt.html', {"user_info": user_info, "items": order_list, "basic_user_info": {'name': user_info['name']}, "totalPrice": request.session['totalPrice']})
-    # TODO: return 404
+    return error_404_view(request, None)
