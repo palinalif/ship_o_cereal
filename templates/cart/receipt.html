@@ -9,13 +9,13 @@
         <h1>Receipt</h1>
         <h3>Thank you for your purchase.</h3>
         <h3>Your purchase will be delivered to {{ address.streetName }}  {{ address.houseNumber }} on May 25th.</h3>
-        <!--<button id = "receipt-button" onclick = "printReceipt({{ items }}, {{ basic_user_info }}, {{ totalPrice }});">Print Receipt</button>-->
         <button id = "receipt-button">Print Receipt</button>
         <br>
         <form action = "{% url 'catalog-page' %}" class = "button-form">
             <button type = "submit">Return to Catalog</button>
         </form>
     </div>
+    <!-- The following script tags are needed to be able to access the django variables in the JS file -->
     <script>
         let totalAmount = {{ totalPrice }};
     </script>
