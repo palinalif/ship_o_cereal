@@ -24,4 +24,10 @@ urlpatterns = [
     path('user/', include('user.urls'))
 ]
 
+handler400 = 'error.views.error_400_view'
+
+handler403 = 'error.views.error_403_view'
+
 handler404 = 'error.views.error_404_view'
+
+handler500 = 'error.views.error_500_view'
