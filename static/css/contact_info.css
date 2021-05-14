@@ -1,0 +1,18 @@
+#form{
+    max-width: 800px;
+    min-width: 600px;
+}
+
+#titlePrevious{
+    font-size: xx-large;
+    margin-left: 25px;
+}
+
+#allItems{
+    display: inline;
+
+}
+
+select {
+    width: 100%;
+}

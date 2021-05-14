@@ -28,7 +28,9 @@
         <div id = "user-info-container">
             <p>Name: {{ profile.name }}</p>
             <p>Phone number: {{ profile.phone }}</p>
-            <p>Address: {{ address.streetName }}  {{ address.houseNumber }} {{ address.postalCode }} {{ address.city }} {{ address.country }}</p>
+            {% if address is not None %}
+                <p>Address: {{ address.streetName }}  {{ address.houseNumber }} {{ address.postalCode }} {{ address.city }} {{ address.country }}</p>
+            {% endif %}
         </div>
         <div id = "button-container">
             <form action="{% url 'contact-info' %}" class = "button-form">

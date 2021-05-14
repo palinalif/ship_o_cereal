@@ -19,7 +19,7 @@ class Profile(models.Model):
     email = models.EmailField(max_length=255)
     phone = models.IntegerField()
     photo = models.CharField(max_length=999)
-    address = models.ForeignKey(Address, on_delete=models.CASCADE)
+    address = models.ForeignKey(Address, on_delete=models.CASCADE, null=True, blank=True)
 
 class PaymentInfo(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)

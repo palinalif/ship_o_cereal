@@ -20,3 +20,14 @@ class ProfileForm(ModelForm):
             'email': widgets.TextInput(attrs={'class': 'form-control'}),
             'phone': widgets.NumberInput(attrs={'class': 'form-control'})
         }
+
+class OnlyProfileForm(ModelForm):
+    class Meta:
+        model = Profile
+        exclude = ['id', 'user', 'address']
+        widgets={
+            'name': widgets.TextInput(attrs={'class': 'form-control'}),
+            'photo': widgets.TextInput(attrs={'class': 'form-control'}),
+            'email': widgets.TextInput(attrs={'class': 'form-control'}),
+            'phone': widgets.NumberInput(attrs={'class': 'form-control'})
+        }

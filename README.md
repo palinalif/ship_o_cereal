@@ -1,6 +1,8 @@
 To use our system there is a need for the following dependencies:
-    <ol>
-<li>pip install django_countries</li>
-<li>pip install django-mathfilters</li>
-    </ol>
-In order to get the correct look of the site and everything as expected there it is necessary to run the program with: python manage.py runserver --insecure.
+    <ul>
+<li>pip install django psycopg2-binary django_countries django-mathfilters</li>
+    </ul>
+In order to get the correct look of the site and everything to be as expected, it is necessary to run the program with: 
+    <ul>
+<li>python manage.py runserver --insecure</li>
+    </ul>

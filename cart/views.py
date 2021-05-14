@@ -4,7 +4,7 @@ from django.http import JsonResponse, HttpResponseRedirect, HttpResponseForbidde
 from django.urls import reverse
 from cart.forms.NewCardForm import NewCardForm
 from user.forms.profile_form import ProfileForm
-from user.models import PaymentInfo
+from user.models import PaymentInfo, Address
 from error.views import *
 
 from user.models import Profile, Order
@@ -48,18 +48,23 @@ def getTotalPrice(orderItems):
 @login_required
 def index(request):
     profile = Profile.objects.filter(user=request.user).first()
-    order = Order.objects.filter(profile=profile, status='In Progress').first()
-    request.session['totalPrice'] = getTotalPrice(OrderItem.objects.filter(order=order))
-    return render(request, 'cart/index.html', {
-        'profile': profile,
-        'address': profile.address,
-        'items': OrderItem.objects.filter(order=order),
-        'totalPrice': request.session['totalPrice']
-    })
+    if profile is None:
+        return redirect('profile')
+    else:
+        order = Order.objects.filter(profile=profile, status='In Progress').first()
+        request.session['totalPrice'] = getTotalPrice(OrderItem.objects.filter(order=order))
+        return render(request, 'cart/index.html', {
+            'profile': profile,
+            'address': profile.address,
+            'items': OrderItem.objects.filter(order=order),
+            'totalPrice': request.session['totalPrice']
+        })
 
 def addToCart(request):
     if request.user.is_authenticated:
         profile = Profile.objects.filter(user=request.user).first()
+        if profile is None:
+            return JsonResponse({'amount': -1})
         order = Order.objects.filter(profile=profile, status='In Progress').first()
         if order is None:
             order = Order()
@@ -94,7 +99,7 @@ def cartEmptyCheck(request):
     order = Order.objects.filter(profile=request.user.profile, status='In Progress').first()
     if order is None:
         return error_400_view(request, None)
-    product = OrderItem.objects.filter(order=order)
+    product = OrderItem.objects.filter(order=order).first()
     if product is None:
         return error_400_view(request, None)
 
@@ -109,7 +114,7 @@ def contactInfo(request):
     if request.method == 'POST':
         form = ProfileForm(instance=profile, data=request.POST)
         if form.is_valid():
-            if profile is None:
+            if profile.address is None:
                 address_instance = Address()
             else:
                 address_instance = request.user.profile.address
@@ -124,17 +129,18 @@ def contactInfo(request):
             profile.address = address_instance
             profile.save()
             return redirect('confirm-card')
-    if profile is None:
-        return render(request, 'cart/contact_info.html', {
-            'form': ProfileForm(instance=profile)})
-    return render(request, 'cart/contact_info.html', {
-        'form': ProfileForm(instance=profile, initial={
+    if request.user.profile.address is None:
+        initial = {}
+    else:
+        initial = {
             'country': request.user.profile.address.country,
             'city': request.user.profile.address.city,
             'houseNumber': request.user.profile.address.houseNumber,
             'streetName': request.user.profile.address.streetName,
             'postNumber': request.user.profile.address.postNumber
-        }),
+        }
+    return render(request, 'cart/contact_info.html', {
+        'form': ProfileForm(instance=profile, initial=initial),
     })
 
 @login_required
@@ -198,6 +204,6 @@ def receipt(request):
         order.status = 'Done'
         order.save()
         order_list = order_item_queries_to_list(OrderItem.objects.filter(order=order))
-        return render(request, 'cart/receipt.html', {"user_info": user_info, "items": order_list, "basic_user_info": {'name': user_info['name']}, "totalPrice": request.session['totalPrice']})
+        return render(request, 'cart/receipt.html', {"user_info": user_info, "address": request.user.profile.address, "items": order_list, "basic_user_info": {'name': user_info['name']}, "totalPrice": request.session['totalPrice']})
 
     return error_400_view(request, None)

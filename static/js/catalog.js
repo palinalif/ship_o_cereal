@@ -23,11 +23,17 @@ function sendToCart(cerealID) {
             url: cartIndex,
             data: {'id': cerealID, 'amount': amount},
             success: function (data) {
-                 //this gets called when server returns an OK response
-                 $(".alert-success").show();
+                if (data['amount'] == -1) {
+                    $(".alert-danger").show()
+                    $(".alert-danger").delay(1000).fadeOut(500);
+                }
+                else {
+                     //this gets called when server returns an OK response
+                     $(".alert-success").show();
+                     $(".alert-success").delay(1000).fadeOut(500);
+                }
                  cereals[cerealID] = 0;
                  updateAmount(cerealID);
-                 $(".alert-success").delay(1000).fadeOut(500);
             },
             error: function (data) {
                 window.location.href = 'user/login';
