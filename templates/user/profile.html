@@ -2,18 +2,24 @@
 {% load static %}
 {% block content %}
     <link rel="stylesheet" href="{% static 'css/edit_profile.css' %}">
-    <form class="form form-horizontal" method="post">
+<div id="allItems">
+    <form class="form form-horizontal" id="form" method="post">
         {% csrf_token %}
         {{ form }}
         <input type="submit" class="btn btn-primary" value="Update"/>
+        <a id= "seeHistory" href="{% url 'seeSearchHistory' %}" >See Search History</a>
     </form>
-    {% if orders is not None %}
-        <h1>Previous orders:</h1>
-    {% endif %}
-    {% for order in orders %}
-        <div>
-            <h2>{{ order.dateCreated }}</h2>
-            <a href="order/{{ order.id }}">View contents</a>
-        </div>
-    {% endfor %}
+        {% if orders is not None %}
+            <b id="titlePrevious">Previous orders:</b>
+    <div id="previousOrders">
+        {% for order in orders %}
+            <a href="order/{{ order.id }}" class="border-button">
+                <div class="orders">
+                    <h2>{{ order.dateCreated }}</h2>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+        {% endif %}
+</div>
 {% endblock %}

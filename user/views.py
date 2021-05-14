@@ -1,6 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 from user.forms.accountForm import AccountRegisterForm
+from user.models import Profile, Address, SearchHistory
 from user.models import Profile, Address, Order
 from cart.models import OrderItem
 from user.forms.profile_form import ProfileForm
@@ -18,6 +19,24 @@ def register(request):
             return redirect('login')
     return render(request, 'user/register.html', {
         'form': UserCreationForm()
+    })
+
+def aboutUs(request):
+    if request.method == 'POST':
+        form = UserCreationForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')
+    return render(request, 'user/aboutUs.html')
+
+def seeSearchHistory(request):
+    if request.method == 'POST':
+        form = UserCreationForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')
+    return render(request, 'user/seeSearchHistory.html', {
+        'searchHistory': SearchHistory.objects.filter(profile=request.user.profile)
     })
 
 @login_required
@@ -52,7 +71,7 @@ def profile(request):
             'streetName': request.user.profile.address.streetName,
             'postNumber': request.user.profile.address.postNumber
         }),
-        'orders': Order.objects.filter(profile=profile, status='Done')
+        'orders': Order.objects.filter(profile=profile, status='Done').order_by('-dateCreated')
     })
 
 @login_required

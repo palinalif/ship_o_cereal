@@ -1,3 +1,41 @@
 select{
     display: block;
 }
+
+#previousOrders{
+    margin: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    min-width: 1000px;
+    max-width: 1000px;
+}
+
+.orders{
+    margin: 20px;
+    background-color: #eabc71;
+    padding: 10px;
+    max-width: 500px;
+    max-width: 250px;
+    color: black;
+    text-decoration: none;
+}
+
+.orders a{
+    color: black;
+    text-decoration: none!important;
+}
+
+#form{
+    max-width: 800px;
+    min-width: 600px;
+}
+
+#titlePrevious{
+    font-size: xx-large;
+    margin-left: 25px;
+}
+
+#allItems{
+    display: inline-flex;
+
+}
