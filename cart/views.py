@@ -10,7 +10,32 @@ from cart.models import OrderItem, Product
 
 # Create your views here.
 
+def order_item_queries_to_list(queries):
+    items = []
+    for item in queries:
+        i = {
+            "product": {
+                "name": item.product.name,
+                "price": item.product.price
+            },
+            "quantity": item.quantity,
+            "order_id": item.order.id
+        }
+        items.append(i)
+    return items
 
+def construct_user_dict(request):
+    user_info = {
+        'name': request.user.profile.name,
+        'email': request.user.profile.email,
+        'phone': request.user.profile.phone,
+        'streetName': request.user.profile.address.streetName,
+        'houseNumber': request.user.profile.address.houseNumber,
+        'city': request.user.profile.address.city,
+        'country': request.user.profile.address.country,
+        'postalCode': request.user.profile.address.postNumber
+    }
+    return user_info
 
 def getTotalPrice(orderItems):
     total = 0
@@ -104,8 +129,10 @@ def review(request):
 @login_required
 def receipt(request):
     if 'currentCard' in request.session.keys():
+        user_info = construct_user_dict(request)
         order = Order.objects.filter(profile=request.user.profile, status='In Progress').first()
         order.status = 'Done'
         order.save()
-        return render(request, 'cart/receipt.html', {'address': request.user.profile.address})
+        order_list = order_item_queries_to_list(OrderItem.objects.filter(order=order))
+        return render(request, 'cart/receipt.html', {"user_info": user_info, "items": order_list, "basic_user_info": {'name': user_info['name']}, "totalPrice": request.session['totalPrice']})
     # TODO: return 404
