@@ -7,7 +7,10 @@
     <link rel="stylesheet" href="{% static 'css/description.css' %}">
     <script src="{% static 'jquery/dist/jquery.js' %}"></script>
     <h1>Product Info</h1>
-    <img class= "img" src="{{ cereal.productimage_set.first.image }}" alt="Cereal img">
+    {% for image in cereal.productimage_set.all %}
+        <img class= "img" src="{{ image.image }}" alt="Cereal img">
+    {% endfor %}
+
     <div class = "information">
         <h2 id= "cerealName" >Name: {{ cereal.name }}</h2>
         <h3 id= "cerealPrice" >Price: {{ cereal.price }} kr</h3>

@@ -9,17 +9,17 @@
         <input type="submit" class="btn btn-primary" value="Update"/>
         <a id= "seeHistory" href="{% url 'seeSearchHistory' %}" >See Search History</a>
     </form>
-        {% if orders is not None %}
+        {% if orders.first is not None %}
             <b id="titlePrevious">Previous orders:</b>
-    <div id="previousOrders">
-        {% for order in orders %}
-            <a href="order/{{ order.id }}" class="border-button">
-                <div class="orders">
-                    <h2>{{ order.dateCreated }}</h2>
-                </div>
-            </a>
-        {% endfor %}
-    </div>
+        <div id="previousOrders">
+            {% for order in orders %}
+                <a href="order/{{ order.id }}" class="border-button">
+                    <div class="orders">
+                        <h2>{{ order.dateCreated }}</h2>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
         {% endif %}
 </div>
 {% endblock %}
