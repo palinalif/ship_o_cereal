@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <link rel="stylesheet" href="{% static 'css/404.css' %}">
+    <div class="center">
+        <h2>500 Error</h2>
+        <h1>Something went wrong</h1>
+        <a href="{% url 'catalog-page' %}" class="btn btn-primary btn-lg" role="button">Back to shopping</a>
+    </div>
+{% endblock %}
