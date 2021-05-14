@@ -1,0 +1,13 @@
+.query{
+    background-color: lightpink;
+    font-size: 28px;
+    margin-left: 15px;
+    padding: 5px;
+    display: flex;
+    flex: auto;
+}
+
+.queries{
+    display: inline-block;
+
+}

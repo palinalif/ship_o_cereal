@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+<head>
+    <title>Search History</title>
+</head>
+{% block content %}
+<body>
+    <link rel="stylesheet" href="{% static 'css/seeSearchHistory.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <script src="{% static 'jquery/dist/jquery.js' %}"></script>
+    <div class = "information">
+        <h1> Here I will show the search history </h1>
+        <div class="queries">
+        {% for query in searchHistory %}
+            <p class="query"> {{ query.query }} </p>
+        {% endfor %}
+        </div>
+    </div>
+</body>
+{% endblock %}

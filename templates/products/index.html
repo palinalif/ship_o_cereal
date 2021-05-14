@@ -12,13 +12,13 @@
         <h2 id= "cerealName" >Name: {{ cereal.name }}</h2>
         <h3 id= "cerealPrice" >Price: {{ cereal.price }} kr</h3>
     </div>
-    <div class= "info" id="Description" >Description: {{ cereal.description }}</div>
+    <span class= "info" id="Description" >Description: {{ cereal.description }}</span>
     <div class ="bigButtons">
         <button class="bigButton" onclick="window.location.href = '{% url 'catalog-page' %}'"> Go Back </button>
     </div>
     {% if user.is_superuser %}
     <a id= "deleteButton" href="{% url 'delete-product' cereal.id %}" class="block btn btn-primary">Delete Product</a>
-    <a id= "updateButton" href="{% url 'update-product' cereal.id %}" class="block btn btn-primary">Update Product</a>
+    <a d= "updateButton" href="{% url 'update-product' cereal.id %}" class="block btn btn-primary">Update Product</a>
     <a id= "createButton" href="{% url 'create-product' %}" class="block btn btn-primary">Create Product</a>
     {% endif %}
 

@@ -14,9 +14,10 @@
 }
 
 .info{
-    display: inline-block;
-    width: 20vw;
-    height: 10vw;
+    display: flex;
+    max-width: fit-content;
+    word-break: break-all;
+    margin-right: 50px;
 }
 
 #inStock{

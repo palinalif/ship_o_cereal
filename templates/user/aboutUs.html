@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+<head>
+    <title>About Us</title>
+</head>
+{% block content %}
+<body>
+    <link rel="stylesheet" href="{% static 'css/aboutUs.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <script src="{% static 'jquery/dist/jquery.js' %}"></script>
+    <div class = "information">
+        <h1> Ship-O-Cereal </h1>
+        <h3> We care deeply about everybody's cereal needs and our goal is to have said needs fulfilled for every cereal lover out there. </h3>
+        <br>
+        <h4> For further information, or if any questions are in need for an answer, just call us on 6986320 or send us an email at ShipOCereal@gmail.com</h4>
+    </div>
+</body>
+{% endblock %}
