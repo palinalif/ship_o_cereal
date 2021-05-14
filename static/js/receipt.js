@@ -1,11 +1,16 @@
-function printReceipt(cartItems, userInfo, totalAmount) {
+function printReceipt() {
+    let cartItems = JSON.parse(document.getElementById('cart-items').textContent);
+    let userInfo = JSON.parse(document.getElementById('user-info').textContent);
     let txtString = "Order ID: " + cartItems[0]['order_id'] + "\n" + "Name: " + userInfo['name'] + "\n\n";
     for (let i = 0; i < cartItems.length; i++) {
-        txtString += i+1 + ". " + cartItems[i]['product']['name'] + "\nQuantity: " + cartItems[i]['quantity'] + "\nPrice:" + cartItems[i]['product']['price'] + "\n\n";
+        txtString += i+1 + ". " + cartItems[i]['product']['name'] + "\nQuantity: " + cartItems[i]['quantity'] +
+            "\nPrice:" + cartItems[i]['product']['price'] + "\n\n";
     }
-    txtString += "Total: " + totalAmount
+    txtString += "Total: " + totalAmount;
+    return txtString;
+}
 
-    var textFile = null,
+var textFile = null,
   makeTextFile = function (text) {
     var data = new Blob([text], {type: 'text/plain'});
 
@@ -22,10 +27,11 @@ function printReceipt(cartItems, userInfo, totalAmount) {
 
 
   var create = document.getElementById('receipt-button');
+
   create.addEventListener('click', function () {
     var link = document.createElement('a');
     link.setAttribute('download', 'receipt.txt');
-    link.href = makeTextFile(txtString);
+    link.href = makeTextFile(printReceipt());
     document.body.appendChild(link);
 
     // wait for the link to be added to the document
@@ -36,5 +42,3 @@ function printReceipt(cartItems, userInfo, totalAmount) {
 		});
 
   }, false);
-}
-

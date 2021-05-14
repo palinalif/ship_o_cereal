@@ -4,6 +4,7 @@ from django.http import JsonResponse, HttpResponseRedirect, HttpResponseForbidde
 from django.urls import reverse
 from cart.forms.NewCardForm import NewCardForm
 from user.models import PaymentInfo
+from error.views import *
 
 from user.models import Profile, Order
 from cart.models import OrderItem, Product
@@ -88,8 +89,21 @@ def removeFromCart(request):
         request.session['totalPrice'] = getTotalPrice(OrderItem.objects.filter(order=order))
         return JsonResponse({'id': request.POST['id'], 'totalPrice': request.session['totalPrice']})
 
+def cartEmptyCheck(request):
+    order = Order.objects.filter(profile=request.user.profile, status='In Progress').first()
+    if order is None:
+        return error_400_view(request, None)
+    product = OrderItem.objects.filter(order=order)
+    if product is None:
+        return error_400_view(request, None)
+
 @login_required
 def pay(request):
+    isEmpty = cartEmptyCheck(request)
+
+    if isEmpty is not None:
+        return isEmpty
+
     if request.method == 'POST':
         form = NewCardForm(data = request.POST)
         if form.is_valid():
@@ -113,6 +127,11 @@ def pay(request):
 
 @login_required
 def review(request):
+    isEmpty = cartEmptyCheck(request)
+
+    if isEmpty is not None:
+        return isEmpty
+
     if 'currentCard' in request.session.keys():
         profile = Profile.objects.filter(user=request.user).first()
         order = Order.objects.filter(profile=profile, status='In Progress').first()
@@ -124,10 +143,15 @@ def review(request):
             'cardNumber': request.session['currentCard']['cardNumber'],
             'totalPrice': request.session['totalPrice']
         })
-    # TODO: return 404
+    return error_400_view(request, None)
 
 @login_required
 def receipt(request):
+    isEmpty = cartEmptyCheck(request)
+
+    if isEmpty is not None:
+        return isEmpty
+
     if 'currentCard' in request.session.keys():
         user_info = construct_user_dict(request)
         order = Order.objects.filter(profile=request.user.profile, status='In Progress').first()
@@ -135,4 +159,5 @@ def receipt(request):
         order.save()
         order_list = order_item_queries_to_list(OrderItem.objects.filter(order=order))
         return render(request, 'cart/receipt.html', {"user_info": user_info, "items": order_list, "basic_user_info": {'name': user_info['name']}, "totalPrice": request.session['totalPrice']})
-    # TODO: return 404
+
+    return error_400_view(request, None)

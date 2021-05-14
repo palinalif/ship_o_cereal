@@ -7,6 +7,7 @@ from cart.models import OrderItem
 from user.forms.profile_form import ProfileForm
 from cart.views import getTotalPrice
 from django.contrib.auth.decorators import login_required
+from error.views import *
 
 
 # Create your views here.
@@ -77,13 +78,14 @@ def profile(request):
 def oldOrder(request, orderID):
     profile = Profile.objects.filter(user=request.user).first()
     order = Order.objects.filter(pk=orderID).first()
+    if order is None:
+        return error_404_view(request, None)
     if order.profile == profile:
         items = OrderItem.objects.filter(order=order)
 
         return render(request, 'user/old_order.html', {
-            'profile': profile,
-            'address': profile.address,
+            'dateCreated': order.dateCreated,
             'items': items,
             'totalPrice': getTotalPrice(items)
         })
-    # TODO: return 403 error
+    return error_403_view(request, None)
