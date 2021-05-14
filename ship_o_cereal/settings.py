@@ -83,7 +83,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'cereal-o-ship-2',
         'USER': 'cereal-o-ship-db-user',
-        'PASSWORD': 'ABC.12345',
+        'PASSWORD': 'bvvPQHTg8jOPBbyMHzWx5YifvKOd4PqA3zXzcU9yPKVxou6RwSyZZsNeQHqhCAdp8203OIRmsKkITOIGhaxHp1hZgcBtyqTqoFKigHp6E4cDPfXMgW5TiIUMRyrJXVa5',
         'HOST': '34.105.143.196',
         'PORT': '5432'
     }
