@@ -7,20 +7,6 @@
     <script src="{% static 'jquery/dist/jquery.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
     <link rel="stylesheet" href="{% static 'css/cart.css' %}">
-    {% for card in cards %}
-        {% csrf_token %}
-        <div class="card-info">
-            <div class = "card-set">
-                <p>Card ending with:</p>
-                <p>************{{ card.cardNumber|slice:"-4:" }}</p>
-            </div>
-            <div class = "card-set">
-                <p>Expiry date:</p>
-                <p>{{ card.expDate|slice:":2" }}/{{ card.expDate|slice:"-2:" }}</p>
-            </div>
-            <button onclick='useCard({{ card.id }})'>Select</button>
-        </div>
-    {% endfor %}
     <h3>New Card:</h3>
     <div id = "register-card">
         <form method="post">
@@ -31,7 +17,7 @@
         </form>
     </div>
 
-    <form action = "{% url 'cart-index' %}" class = "button-form">
+    <form action = "{% url 'contact-info' %}" class = "button-form">
         <button type = "submit">Go Back</button>
     </form>
 

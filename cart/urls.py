@@ -5,6 +5,7 @@ urlpatterns = [
     #http://localhost:8000/cart
     path('', views.index, name="cart-index"),
     #http://localhost:8000/cart/confirm-card
+    path('contact-info/', views.contactInfo, name="contact-info"),
     path('confirm-card/', views.pay, name="confirm-card"),
     #http://localhost:8000/cart/review
     path('review/', views.review, name="review"),

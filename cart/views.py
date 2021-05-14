@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse, HttpResponseRedirect, HttpResponseForbidden
 from django.urls import reverse
 from cart.forms.NewCardForm import NewCardForm
+from user.forms.profile_form import ProfileForm
 from user.models import PaymentInfo
 from error.views import *
 
@@ -98,6 +99,45 @@ def cartEmptyCheck(request):
         return error_400_view(request, None)
 
 @login_required
+def contactInfo(request):
+    isEmpty = cartEmptyCheck(request)
+
+    if isEmpty is not None:
+        return isEmpty
+
+    profile = Profile.objects.filter(user=request.user).first()
+    if request.method == 'POST':
+        form = ProfileForm(instance=profile, data=request.POST)
+        if form.is_valid():
+            if profile is None:
+                address_instance = Address()
+            else:
+                address_instance = request.user.profile.address
+            address_instance.country = request.POST['country']
+            address_instance.city = request.POST['city']
+            address_instance.houseNumber = request.POST['houseNumber']
+            address_instance.streetName = request.POST['streetName']
+            address_instance.postNumber = request.POST['postNumber']
+            address_instance.save()
+            profile = form.save(commit=False)
+            profile.user = request.user
+            profile.address = address_instance
+            profile.save()
+            return redirect('confirm-card')
+    if profile is None:
+        return render(request, 'cart/contact_info.html', {
+            'form': ProfileForm(instance=profile)})
+    return render(request, 'cart/contact_info.html', {
+        'form': ProfileForm(instance=profile, initial={
+            'country': request.user.profile.address.country,
+            'city': request.user.profile.address.city,
+            'houseNumber': request.user.profile.address.houseNumber,
+            'streetName': request.user.profile.address.streetName,
+            'postNumber': request.user.profile.address.postNumber
+        }),
+    })
+
+@login_required
 def pay(request):
     isEmpty = cartEmptyCheck(request)
 
@@ -105,7 +145,7 @@ def pay(request):
         return isEmpty
 
     if request.method == 'POST':
-        form = NewCardForm(data = request.POST)
+        form = NewCardForm(data=request.POST)
         if form.is_valid():
             newCard = form.save(commit=False)
             request.session['currentCard'] = {

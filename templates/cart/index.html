@@ -31,8 +31,8 @@
             <p>Address: {{ address.streetName }}  {{ address.houseNumber }} {{ address.postalCode }} {{ address.city }} {{ address.country }}</p>
         </div>
         <div id = "button-container">
-            <form action="{% url 'confirm-card' %}" class = "button-form">
-                <button type = "submit">Pay</button>
+            <form action="{% url 'contact-info' %}" class = "button-form">
+                <button type = "submit">Continue</button>
             </form>
             <form action = "{% url 'catalog-page' %}" class = "button-form">
                 <button type = "submit">Go Back</button>
