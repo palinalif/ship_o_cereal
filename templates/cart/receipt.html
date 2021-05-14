@@ -9,11 +9,18 @@
         <h1>Receipt</h1>
         <h3>Thank you for your purchase.</h3>
         <h3>Your purchase will be delivered to {{ address.streetName }}  {{ address.houseNumber }} on May 25th.</h3>
-        <button id = "receipt-button" onclick = "printReceipt({{ items }}, {{ basic_user_info }}, {{ totalPrice }});">Print Receipt</button>
+        <!--<button id = "receipt-button" onclick = "printReceipt({{ items }}, {{ basic_user_info }}, {{ totalPrice }});">Print Receipt</button>-->
+        <button id = "receipt-button">Print Receipt</button>
         <br>
         <form action = "{% url 'catalog-page' %}" class = "button-form">
             <button type = "submit">Return to Catalog</button>
         </form>
     </div>
+    <script>
+        let totalAmount = {{ totalPrice }};
+    </script>
+    <!--https://docs.djangoproject.com/en/2.1/ref/templates/builtins/#json-script-->
+    {{ items|json_script:"cart-items" }}
+    {{ basic_user_info|json_script:"user-info" }}
     <script type="text/javascript" src="{% static 'js/receipt.js' %}"></script>
 {% endblock %}
