@@ -44,11 +44,13 @@ def deleteProduct(request, id):
 
 def updateProduct(request, id):
     if request.user.is_superuser:
-        instance = get_object_or_404(Product, pk = id)
+        instance = get_object_or_404(Product, pk=id)
         if request.method == 'POST':
             form = ProductForm(data=request.POST, instance=instance)
             if form.is_valid():
-                form.image = request.POST['image']
+                cerealImage = ProductImage.objects.filter(product=instance).first()
+                cerealImage.image = request.POST['image']
+                cerealImage.save()
                 form.save()
                 return redirect('product-index', id=id)
         else:
